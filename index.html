@@ -528,7 +528,7 @@
 
 <!-- ═══ Navigation ════════════════════════════════════════════════════ -->
 <nav id="mainNav">
-  <span class="nav-logo">🌸</span>
+  <img src="icon_hoa_sen_nobg.webp" alt="Logo" style="height: 36px; width: auto;" class="nav-logo" />
   <ul class="nav-links">
     <li><a href="#hero">Trang Chủ</a></li>
     <li><a href="#carousel-section">Việt Phục</a></li>
@@ -902,6 +902,7 @@
       desc:'Váy quấn, áo cộc tay từ vải thô, họa tiết hình chim Lạc đặc trưng.',
       color1:'#c8a878', color2:'#a07840',
       shape:'ancient',
+      image:'Trang phục Văn Lang.jpg'
     },
     {
       era:'Thời Lý (1009–1225)',
@@ -909,6 +910,7 @@
       desc:'Áo dài tay cổ tròn, màu đơn sắc theo phẩm cấp triều đình.',
       color1:'#8898d0', color2:'#5560a0',
       shape:'court',
+      image:'ảnh demo/áo cổ tròn thời Lý.png'
     },
     {
       era:'Thời Trần (1225–1400)',
@@ -916,6 +918,7 @@
       desc:'Vạt chéo, tay rộng thùng thình, thường kết hợp thắt lưng lụa.',
       color1:'#c05858', color2:'#902020',
       shape:'giaolĩnh',
+      image:'ảnh demo/áo giao lĩnh thời Trần.jpg'
     },
     {
       era:'Thời Lê Sơ (1428–1527)',
@@ -923,6 +926,7 @@
       desc:'Áo đơn giản hơn, ảnh hưởng Nho giáo – nghiêm trang, thanh nhã.',
       color1:'#508050', color2:'#305030',
       shape:'leso',
+      image:'ảnh demo/triều phục lê sơ.png'
     },
     {
       era:'Thời Nguyễn (1802–1945)',
@@ -930,6 +934,7 @@
       desc:'Ngũ thân tứ quý, chiếc áo dài truyền thống kết hợp khăn đóng.',
       color1:'#9048a8', color2:'#602878',
       shape:'nguyen',
+      image:'ảnh demo/áo ngũ thân thời Nguyễn.jpg'
     },
     {
       era:'Đầu TK XX (1920–1945)',
@@ -937,6 +942,7 @@
       desc:'Áo dài Lemur ôm sát, tôn dáng người phụ nữ Việt hiện đại.',
       color1:'#c87040', color2:'#903820',
       shape:'lemur',
+      image:'ảnh demo/áo dài Lemur.png'
     },
     {
       era:'Giữa TK XX (1945–1975)',
@@ -944,6 +950,7 @@
       desc:'Cổ thuyền, không cổ đứng – phong cách táo bạo thời bấy giờ.',
       color1:'#40a0a8', color2:'#206880',
       shape:'modern1',
+      image:'ảnh demo/áo dài bà Nhu.jpg'
     },
     {
       era:'Cuối TK XX (1975–2000)',
@@ -951,6 +958,7 @@
       desc:'Áo dài đời thường, chất liệu nhẹ hơn, màu sắc tươi sáng.',
       color1:'#e06880', color2:'#b03858',
       shape:'modern2',
+      image:'ảnh demo/áo dài giản dị.jpg'
     },
     {
       era:'Đương đại (2000–nay)',
@@ -958,6 +966,7 @@
       desc:'Kết hợp họa tiết truyền thống và thiết kế hiện đại – Gen Z tái định nghĩa.',
       color1:'#6870d8', color2:'#3838a8',
       shape:'genz',
+      image:'ảnh demo/áo dài genZ cách tân.jpg'
     },
   ];
 
@@ -1038,9 +1047,12 @@
   allItems.forEach((c, idx) => {
     const card = document.createElement('div');
     card.className = 'carousel-card';
+    const imgHtml = c.image 
+        ? `<img src="${c.image}" alt="${c.name}" style="width:100%;height:100%;object-fit:cover;"/>`
+        : costumeSVG(c, idx);
     card.innerHTML = `
       <div class="card-img-wrap">
-        ${costumeSVG(c, idx)}
+        ${imgHtml}
       </div>
       <div class="card-info">
         <div class="card-era">${c.era}</div>
