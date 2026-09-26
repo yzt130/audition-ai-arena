@@ -1,0 +1,480 @@
+/* ==========================================================================
+   VIỆT PHỤC REMIX - CSS TỦ ĐỒ VIỆT PHỤC SỐ (DIGITAL DRESSING ROOM)
+   Sân khấu phối đồ 3 khối: Thiết lập bối cảnh, Sân khấu Avatar, Tủ đồ
+   ========================================================================== */
+
+.dressing-room-section {
+  padding: 4rem 1.5rem;
+  background: linear-gradient(180deg, #faf7f2 0%, #f4ede2 100%);
+  position: relative;
+}
+
+/* KHỐI 1: BỐI CẢNH & SỰ KIỆN (TOP BAR) */
+.context-event-bar {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1fr;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+/* 1.1 Bản đồ Việt Nam tương tác 3 miền */
+.map-region-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.map-svg-box {
+  width: 90px;
+  height: 120px;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.vietnam-map-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.map-path-region {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.map-path-region:hover {
+  filter: brightness(1.2) drop-shadow(0 0 4px var(--color-gold));
+}
+
+.region-buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.region-group-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
+
+.region-pills-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.map-region-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-main);
+  transition: var(--transition-smooth);
+}
+
+.map-region-btn:hover {
+  background: var(--color-mint);
+  border-color: var(--color-jade);
+}
+
+.map-region-btn.active {
+  background: linear-gradient(135deg, var(--color-primary), #a91b2e);
+  color: #ffffff;
+  border-color: var(--color-gold);
+  box-shadow: 0 2px 8px rgba(139, 38, 62, 0.25);
+}
+
+/* 1.2 Bộ chọn Hoàn cảnh / Sự kiện */
+.event-selector-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
+
+.custom-select-wrap {
+  position: relative;
+}
+
+.styled-select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-ivory);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: var(--transition-smooth);
+}
+
+.styled-select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 38, 62, 0.15);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-primary);
+  font-size: 0.8rem;
+}
+
+/* 1.3 Nút chuyển đổi Giới tính */
+.gender-switch-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.gender-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
+
+.gender-toggle-group {
+  display: flex;
+  background: var(--color-surface-soft);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 0.25rem;
+  width: 100%;
+  max-width: 220px;
+}
+
+.gender-toggle-btn {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: var(--transition-smooth);
+}
+
+.gender-toggle-btn.active {
+  background: #ffffff;
+  color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--color-gold);
+}
+
+/* ==========================================================================
+   KHUNG PHỐI ĐỒ CHÍNH (STAGE & WARDROBE LAYOUT)
+   ========================================================================== */
+.dressing-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* KHỐI 2: SÂN KHẤU AVATAR TRỰC TIẾP (STAGE DISPLAY) */
+.stage-display-container {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 90px;
+}
+
+.stage-canvas-wrapper {
+  width: 100%;
+  max-width: 440px;
+  height: 580px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffdf9;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+  overflow: hidden;
+}
+
+#avatar-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BẢNG ĐỔI MÀU NGŨ HÀNH (COLOR PALETTE) TRÊN SÂN KHẤU */
+.stage-element-palette {
+  margin-top: 1.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.palette-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.palette-swatches-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.element-swatch-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.element-swatch-btn:hover {
+  transform: translateY(-3px) scale(1.15);
+}
+
+.element-swatch-btn.active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px var(--color-primary), 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.element-swatch-btn.swatch-kim { background: linear-gradient(135deg, #ffffff, #d4af37); }
+.element-swatch-btn.swatch-moc { background: linear-gradient(135deg, #81c784, #2e7d32); }
+.element-swatch-btn.swatch-thuy { background: linear-gradient(135deg, #64b5f6, #0d47a1); }
+.element-swatch-btn.swatch-hoa { background: linear-gradient(135deg, #ef5350, #b71c1c); }
+.element-swatch-btn.swatch-tho { background: linear-gradient(135deg, #fff59d, #f9a825); }
+
+/* Thanh nút thao tác nhanh trên sân khấu */
+.stage-actions-bar {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.action-btn-secondary {
+  background: var(--color-surface-soft);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+}
+
+.action-btn-secondary:hover {
+  background: #ece3d3;
+}
+
+.action-btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), #a91b2e);
+  color: #ffffff;
+  border: 1px solid var(--color-gold);
+}
+
+.action-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold), 0 4px 12px rgba(139, 38, 62, 0.3);
+}
+
+/* ==========================================================================
+   KHỐI 3: TỦ ĐỒ PHỤC TRANG & PHỤ KIỆN (WARDROBE PANEL)
+   ========================================================================== */
+.wardrobe-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Thanh Tabs Phân Loại */
+.wardrobe-tabs-bar {
+  display: flex;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 0.35rem;
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.wardrobe-tab-btn {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.wardrobe-tab-btn:hover {
+  color: var(--color-primary);
+}
+
+.wardrobe-tab-btn.active {
+  background: linear-gradient(135deg, var(--color-primary), #a91b2e);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(139, 38, 62, 0.25);
+}
+
+/* Lưới vật phẩm trong tủ đồ */
+.wardrobe-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  max-height: 480px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.wardrobe-card {
+  background: var(--color-bg-ivory);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.wardrobe-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-gold);
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+}
+
+.wardrobe-card.selected {
+  border-color: var(--color-primary);
+  background: #fff8f8;
+  box-shadow: 0 0 0 2px var(--color-primary), var(--shadow-sm);
+}
+
+.wardrobe-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.wardrobe-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.wardrobe-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.25;
+}
+
+.wardrobe-era {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+/* Card màu ngũ hành đặc biệt */
+.element-card .element-swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+/* THÔNG TIN VÙNG MIỀN TÓM TẮT */
+.region-summary-banner {
+  background: var(--color-surface-soft);
+  border-left: 4px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: #5d4037;
+  line-height: 1.5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .context-event-bar {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .dressing-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .stage-display-container {
+    position: static;
+  }
+}

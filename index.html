@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIỆT PHỤC REMIX - Khơi Nguồn Dân Tộc | Trải Nghiệm Tủ Đồ Số & Cổ Phục Di Sản</title>
+  
+  <meta name="description" content="Khám phá và trải nghiệm tủ đồ số Việt Phục Remix. Tôn vinh trang phục truyền thống Việt Nam qua các triều đại: Giao Lĩnh, Nhật Bình, Áo Tấc, Ngũ Thân, Tứ Thân, Bà Ba và Áo Dài tân thời." />
+  <meta property="og:title" content="VIỆT PHỤC REMIX - Khơi Nguồn Dân Tộc" />
+  <meta property="og:description" content="Trải nghiệm phối đồ di sản Việt Nam, âm nhạc ngũ cung cổ truyền và xuất bưu thiếp văn hóa cá nhân hóa." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>" />
+
+  <!-- Google Fonts: Ballet, Dancing Script, Be Vietnam Pro, Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Cinzel+Decorative:wght@700;900&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/dressing-room.css" />
+  <link rel="stylesheet" href="css/modal-postcard.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       THANH ĐIỀU HƯỚNG CỐ ĐỊNH (SITE HEADER & MUSIC CONTROLLER)
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#hero-stage" class="brand-box" aria-label="Việt Phục Remix Trang chủ">
+        <div class="brand-emblem">🌸</div>
+        <div>
+          <span class="brand-title">VIỆT PHỤC REMIX</span>
+          <span class="brand-subtitle">Khơi Nguồn Dân Tộc</span>
+        </div>
+      </a>
+
+      <nav aria-label="Điều hướng trang web">
+        <ul class="nav-links">
+          <li><a href="#hero-stage" class="nav-link">Trang Chủ</a></li>
+          <li><a href="#filmstrip-section" class="nav-link">Dòng Chảy Lịch Sử</a></li>
+          <li><a href="#dressing-room-section" class="nav-link">Tủ Đồ Số</a></li>
+          <li><a href="#lookbook-section" class="nav-link">Bộ Sưu Tập Lookbook</a></li>
+        </ul>
+      </nav>
+
+      <!-- Trình phát nhạc nền ngũ cung cổ truyền (Web Audio API) -->
+      <div class="audio-ctrl-box">
+        <button id="music-toggle-btn" class="music-toggle-btn" aria-label="Bật nhạc nền ngũ cung">
+          <span class="music-icon">🎵</span>
+          <span id="music-label" class="music-label">Nhạc Ngũ Cung</span>
+          <div id="music-wave" class="music-wave">
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       PHẦN 1: HERO STAGE & DÒNG CHẢY LỊCH SỬ (LANDING FLOW)
+       ========================================================================== -->
+  <main>
+    <section id="hero-stage" class="hero-stage">
+      <!-- Canvas 2D cánh sen hồng rơi uốn lượn theo gió -->
+      <canvas id="petals-canvas"></canvas>
+
+      <div class="hero-content">
+        <span class="hero-brand-tag">Di Sản Ngàn Năm Bừng Nở</span>
+        <h1 class="hero-main-title">Khơi nguồn dân tộc</h1>
+        <p class="hero-subtitle">“mỗi lựa chọn là một cách để chạm lại cội nguồn”</p>
+
+        <!-- ĐÀI SEN NỞ VECTOR SVG VỚI HIỆU ỨNG VẼ NÉT & PHÁT SÁNG HOÀNG KIM -->
+        <div class="blooming-lotus-wrap" title="Đài sen nở ngàn năm - Chạm vào để chiêm ngưỡng ánh hào quang">
+          <svg class="blooming-lotus-svg" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lotus-grad-outer" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#f06292" stop-opacity="0.8" />
+                <stop offset="70%" stop-color="#f8bbd0" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95" />
+              </linearGradient>
+              <linearGradient id="lotus-grad-inner" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#e91e63" stop-opacity="0.85" />
+                <stop offset="60%" stop-color="#f48fb1" stop-opacity="0.95" />
+                <stop offset="100%" stop-color="#fff9c4" stop-opacity="0.9" />
+              </linearGradient>
+            </defs>
+
+            <!-- Lớp cánh ngoài cùng (Layer 1) -->
+            <path class="lotus-stroke lotus-petal-layer-1" 
+                  d="M 100,140 C 40,145 15,100 20,65 C 45,65 75,100 100,140 Z" 
+                  fill="url(#lotus-grad-outer)" stroke="#d4af37" stroke-width="1.5" />
+            <path class="lotus-stroke lotus-petal-layer-1" 
+                  d="M 100,140 C 160,145 185,100 180,65 C 155,65 125,100 100,140 Z" 
+                  fill="url(#lotus-grad-outer)" stroke="#d4af37" stroke-width="1.5" />
+
+            <!-- Lớp cánh trung gian (Layer 2) -->
+            <path class="lotus-stroke lotus-petal-layer-2" 
+                  d="M 100,140 C 50,130 35,70 55,40 C 75,55 90,95 100,140 Z" 
+                  fill="url(#lotus-grad-inner)" stroke="#d4af37" stroke-width="1.5" />
+            <path class="lotus-stroke lotus-petal-layer-2" 
+                  d="M 100,140 C 150,130 165,70 145,40 C 125,55 110,95 100,140 Z" 
+                  fill="url(#lotus-grad-inner)" stroke="#d4af37" stroke-width="1.5" />
+
+            <!-- Lớp cánh trung tâm búp sen (Layer 3) -->
+            <path class="lotus-stroke lotus-petal-layer-3" 
+                  d="M 100,140 C 70,110 65,40 100,15 C 135,40 130,110 100,140 Z" 
+                  fill="url(#lotus-grad-inner)" stroke="#ffd54f" stroke-width="2" />
+
+            <!-- Gương sen nhụy vàng tỏa sáng -->
+            <ellipse class="lotus-stroke lotus-center-seed" 
+                     cx="100" cy="115" rx="16" ry="7" fill="#fff59d" stroke="#fbc02d" stroke-width="1.5" />
+            <circle cx="95" cy="115" r="1.5" fill="#f57f17" />
+            <circle cx="100" cy="114" r="1.5" fill="#f57f17" />
+            <circle cx="105" cy="115" r="1.5" fill="#f57f17" />
+          </svg>
+        </div>
+
+        <a href="#dressing-room-section" class="hero-cta-btn">
+          <span>✨ Bước Vào Tủ Đồ Số</span>
+          <span>➜</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- THƯỚC PHIM DÒNG CHẢY LỊCH SỬ (FILMSTRIP CAROUSEL) -->
+    <section id="filmstrip-section" class="filmstrip-section">
+      <div class="filmstrip-header">
+        <span class="filmstrip-tag">Cuộn Phim Thời Gian</span>
+        <h2 class="filmstrip-title">Thước Phim Dòng Chảy Việt Phục</h2>
+        <p style="color: #bcaaa4; font-size: 0.9rem; margin-top: 0.25rem;">Rê chuột để tạm dừng • Nhấp vào thẻ để xem chi tiết từng thời kỳ lịch sử</p>
+      </div>
+
+      <!-- Khung viền răng cưa phim sprocket holes 35mm -->
+      <div class="filmstrip-container">
+        <div class="filmstrip-viewport">
+          <div id="filmstrip-track" class="filmstrip-track">
+            <!-- Thẻ các thời kỳ sẽ được render tự động từ js/data.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PHẦN 2: TỦ ĐỒ VIỆT PHỤC SỐ (DIGITAL DRESSING ROOM)
+         ========================================================================== -->
+    <section id="dressing-room-section" class="dressing-room-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Trải Nghiệm Tương Tác</span>
+          <h2 class="section-title">Phòng Thử Đồ Việt Phục Số</h2>
+          <div class="section-divider">
+            <span class="divider-line"></span>
+            <span class="divider-lotus">🌸</span>
+            <span class="divider-line"></span>
+          </div>
+        </div>
+
+        <!-- KHỐI 1: BỐI CẢNH & SỰ KIỆN (TOP BAR) -->
+        <div class="context-event-bar">
+          <!-- 1.1 Bản đồ Việt Nam 3 miền tương tác -->
+          <div class="map-region-wrapper">
+            <div class="map-svg-box" title="Bản đồ chữ S 3 Miền Việt Nam - Nhấp để đổi bối cảnh">
+              <svg class="vietnam-map-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                <!-- Miền Bắc -->
+                <path class="map-path-region" data-region="bac" 
+                      d="M 30,10 Q 55,5 75,20 Q 80,40 60,50 Q 40,55 30,45 Q 20,25 30,10 Z" 
+                      fill="#26a69a" stroke="#ffffff" stroke-width="1.5" />
+                <text x="45" y="32" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">BẮC</text>
+
+                <!-- Miền Trung -->
+                <path class="map-path-region" data-region="trung" 
+                      d="M 60,50 Q 75,65 80,95 Q 65,105 55,90 Q 50,70 60,50 Z" 
+                      fill="#a91b2e" stroke="#ffffff" stroke-width="1.5" />
+                <text x="68" y="78" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">TRUNG</text>
+
+                <!-- Miền Nam -->
+                <path class="map-path-region" data-region="nam" 
+                      d="M 55,90 Q 70,105 75,125 Q 60,150 40,145 Q 25,135 35,115 Q 45,95 55,90 Z" 
+                      fill="#fbc02d" stroke="#ffffff" stroke-width="1.5" />
+                <text x="50" y="125" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">NAM</text>
+              </svg>
+            </div>
+
+            <div class="region-buttons-group">
+              <span class="region-group-label">Chọn Vùng Miền:</span>
+              <div class="region-pills-row">
+                <button class="map-region-btn" data-region="bac">Miền Bắc</button>
+                <button class="map-region-btn active" data-region="trung">Miền Trung</button>
+                <button class="map-region-btn" data-region="nam">Miền Nam</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.2 Bộ chọn Hoàn cảnh / Sự kiện -->
+          <div class="event-selector-box">
+            <span class="event-label">Hoàn Cảnh / Sự Kiện:</span>
+            <div class="custom-select-wrap">
+              <select id="event-selector" class="styled-select" aria-label="Chọn hoàn cảnh sự kiện">
+                <!-- Danh sách sự kiện tải từ js/data.js -->
+              </select>
+              <span class="select-arrow">▼</span>
+            </div>
+          </div>
+
+          <!-- 1.3 Chuyển đổi Giới tính -->
+          <div class="gender-switch-box">
+            <span class="gender-label">Nhân Vật:</span>
+            <div class="gender-toggle-group">
+              <button class="gender-toggle-btn active" data-gender="female">
+                <span>👩</span> Nữ
+              </button>
+              <button class="gender-toggle-btn" data-gender="male">
+                <span>👨</span> Nam
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Băng tóm tắt vùng miền -->
+        <div id="region-summary-text" class="region-summary-banner" style="margin-bottom: 2rem;">
+          <strong>Miền Trung (Xứ Huế Thần Kinh):</strong> Mảnh đất kinh kỳ hoa lệ lưu giữ tinh hoa triều Nguyễn: Áo Nhật Bình rực rỡ ngũ sắc, Áo Tấc trang nghiêm chốn hương từ và nón bài thơ nghiêng vành.
+        </div>
+
+        <!-- GIAO DIỆN PHỐI ĐỒ CHÍNH (STAGE & WARDROBE) -->
+        <div class="dressing-main-grid">
+          
+          <!-- KHỐI 2: SÂN KHẤU AVATAR TRỰC TIẾP (STAGE DISPLAY) -->
+          <div class="stage-display-container">
+            <div class="stage-canvas-wrapper">
+              <div id="avatar-container">
+                <!-- SVG Avatar nhiều lớp render tại đây -->
+              </div>
+            </div>
+
+            <!-- Bảng Đổi Màu Ngũ Hành (Color Palette) -->
+            <div class="stage-element-palette">
+              <span class="palette-label">☯ Bảng Màu Ngũ Hành (Nhuộm Tà Áo):</span>
+              <div class="palette-swatches-row">
+                <button class="element-swatch-btn swatch-kim" data-element="kim" title="Hành Kim (Bạch Kim) - Trắng ngọc & Ánh kim"></button>
+                <button class="element-swatch-btn swatch-moc" data-element="moc" title="Hành Mộc (Thanh Mộc) - Xanh lục non"></button>
+                <button class="element-swatch-btn swatch-thuy" data-element="thuy" title="Hành Thủy (Huyền Thủy) - Chàm lam thâm trầm"></button>
+                <button class="element-swatch-btn swatch-hoa active" data-element="hoa" title="Hành Hỏa (Xích Hỏa) - Đỏ điều & Hồng sen"></button>
+                <button class="element-swatch-btn swatch-tho" data-element="tho" title="Hành Thổ (Hoàng Thổ) - Vàng hoàng gia"></button>
+              </div>
+            </div>
+
+            <!-- Thanh nút hành động nhanh -->
+            <div class="stage-actions-bar">
+              <button id="randomize-btn" class="action-btn action-btn-secondary" title="Phối đồ ngẫu hứng">
+                <span>🎲</span> Phối Ngẫu Hứng
+              </button>
+              <button id="reset-btn" class="action-btn action-btn-secondary" title="Đặt lại ban đầu">
+                <span>🔄</span> Đặt Lại
+              </button>
+              <button id="export-postcard-btn" class="action-btn action-btn-primary" title="Xuất thiệp bưu thiếp văn hóa">
+                <span>🏮</span> Xuất Thiệp Di Sản
+              </button>
+            </div>
+          </div>
+
+          <!-- KHỐI 3: TỦ ĐỒ PHỤC TRANG & THẺ TRI THỨC VĂN HÓA -->
+          <div class="wardrobe-panel">
+            
+            <!-- Thanh Tab Phân Loại -->
+            <div class="wardrobe-tabs-bar">
+              <button class="wardrobe-tab-btn active" data-tab="outfits">👘 Loại Áo</button>
+              <button class="wardrobe-tab-btn" data-tab="elements">☯ Ngũ Hành</button>
+              <button class="wardrobe-tab-btn" data-tab="headwears">👑 Mũ / Khăn</button>
+              <button class="wardrobe-tab-btn" data-tab="accessories">🪭 Phụ Kiện & Giày</button>
+            </div>
+
+            <!-- Lưới Chọn Vật Phẩm Trong Tủ Đồ -->
+            <div id="wardrobe-items-grid" class="wardrobe-items-grid">
+              <!-- Render tự động bởi js/main.js -->
+            </div>
+
+            <!-- THẺ GHI CHÚ TRI THỨC VĂN HÓA (HERITAGE INFO CARD) -->
+            <div id="heritage-info-card" class="heritage-info-card">
+              <!-- Nội dung thẻ tri thức hiển thị tại đây -->
+            </div>
+
+            <!-- HỆ THỐNG CẢNH BÁO TƯ PHONG & CỐ VẤN LỊCH SỰ (CULTURAL GENTLE REMINDER) -->
+            <div id="cultural-gentle-reminder" class="cultural-reminder-box neutral">
+              <!-- Thông báo gợi ý nhã nhặn hiển thị tại đây -->
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PHẦN 3: BỘ SƯU TẬP LOOKBOOK CÁ NHÂN (LOOKBOOK GALLERY)
+         ========================================================================== -->
+    <section id="lookbook-section" class="lookbook-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Góc Tri Ân Di Sản</span>
+          <h2 class="section-title">Bộ Sưu Tập Lookbook Của Bạn</h2>
+          <div class="section-divider">
+            <span class="divider-line"></span>
+            <span class="divider-lotus">📜</span>
+            <span class="divider-line"></span>
+          </div>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+            Những tấm thiệp bưu thiếp bạn đã lưu lại với con dấu triện son mộc đỏ tôn vinh cốt cách người Việt.
+          </p>
+        </div>
+
+        <div id="lookbook-gallery" class="lookbook-gallery">
+          <!-- Render danh sách lookbook đã lưu từ localStorage -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL 1: XUẤT THIỆP BƯU THIẾP VĂN HÓA (POSTCARD MODAL)
+       ========================================================================== -->
+  <div id="postcard-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="postcard-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <h3 id="postcard-modal-title" class="modal-title">Bưu Thiếp Di Sản Văn Hóa</h3>
+          <span class="modal-subtitle">Việt Phục Remix • Khơi Nguồn Dân Tộc</span>
+        </div>
+        <button id="close-postcard-btn" class="modal-close-btn" aria-label="Đóng cửa sổ">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="postcard-canvas-wrapper">
+          <canvas id="postcard-canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="save-lookbook-btn" class="modal-btn modal-btn-lookbook">
+          <span>💾</span> Lưu Vào Lookbook
+        </button>
+        <button id="download-postcard-btn" class="modal-btn modal-btn-download">
+          <span>📥</span> Tải Bưu Thiếp (PNG)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: CHI TIẾT THỜI KỲ LỊCH SỬ (HISTORICAL ERA MODAL)
+       ========================================================================== -->
+  <div id="era-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <h3 class="modal-title">Dòng Chảy Di Sản</h3>
+          <span class="modal-subtitle">Trang phục qua các thời kỳ lịch sử</span>
+        </div>
+        <button id="close-era-modal-btn" class="modal-close-btn" aria-label="Đóng cửa sổ">✕</button>
+      </div>
+
+      <div id="era-modal-body" class="modal-body">
+        <!-- Render chi tiết thời kỳ khi click trên filmstrip -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-logo">VIỆT PHỤC REMIX - KHƠI NGUỒN DÂN TỘC</div>
+      <p class="footer-motto">
+        “Mỗi tà áo người Việt khoác lên hôm nay là một đóa sen ngàn năm bung nở, kết nối dòng máu Tiên Rồng với tương lai rạng ngời.”
+      </p>
+      <div class="footer-credit">
+        Dự án Creative Tech & Văn hóa Di sản Dân tộc • 100% Client-side SPA • Thiết kế & Kỹ thuật tôn vinh Cổ phục Việt Nam
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/petals.js"></script>
+  <script src="js/avatar.js"></script>
+  <script src="js/advisory.js"></script>
+  <script src="js/postcard.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
