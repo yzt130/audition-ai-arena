@@ -925,7 +925,8 @@
   </div>
 </section>
 
-<!-- ═══ Section: Phối Đồ Tự Động (Miễn Phí, Không Cần Key) ════════════ -->
+<!-- ═══ Section: Phối Đồ & Sinh Ảnh Gemini AI ════════════════════════ -->
+<!-- ═══ Section: Phối Đồ & Kết Nối Gemini Pro ════════════════════════ -->
 <section id="phoi-do">
   <div class="studio-header">
     <h2 class="studio-title">Xưởng Phối Đồ Dân Tộc</h2>
@@ -994,43 +995,56 @@
           <button class="pill-btn" data-prompt="in a high-fashion artistic studio with clean minimalist background and dramatic cinematic editorial lighting">Studio Nghệ Thuật</button>
         </div>
       </div>
+
+      <!-- Hướng dẫn đồng bộ -->
+      <div style="background: rgba(255,255,255,0.6); padding: 14px; border-radius: 12px; font-size: 0.8rem; color: var(--text-ui); line-height: 1.6; border: 1px dashed var(--petal-accent);">
+        <strong>✦ Quy trình đồng bộ với tài khoản Gemini Pro:</strong>
+        <ol style="padding-left: 18px; margin-top: 6px;">
+          <li>Chọn các món đồ yêu thích ở bảng trên.</li>
+          <li>Nhấn nút <strong>"🚀 Mở Gemini Pro & Dán Prompt"</strong> ở cột bên phải.</li>
+          <li>Tại tab Gemini Pro, nhấn <strong>Ctrl + V</strong> và Enter để sinh ảnh.</li>
+          <li>Chuột phải vào ảnh vừa tạo chọn <strong>Sao chép ảnh (Copy Image)</strong>, quay lại đây và nhấn <strong>Ctrl + V</strong> để đưa ảnh vào khung tranh.</li>
+        </ol>
+      </div>
     </div>
 
-    <!-- CỘT PHẢI: PROMPT & KHUNG HIỂN THỊ ẢNH -->
+    <!-- CỘT PHẢI: PROMPT & KHUNG NHẬN ẢNH -->
     <div class="studio-card">
-      <label class="control-label">Prompt Nghệ Thuật Tự Động:</label>
+      <label class="control-label">Prompt Tối Ưu Cho Gemini Pro:</label>
       <div class="prompt-box" id="promptPreview">Đang khởi tạo prompt...</div>
 
-      <!-- Khung Tranh Hiển Thị Ảnh -->
-      <div class="result-frame" id="resultFrame">
-        <div class="loader-lotus" id="resultLoader"></div>
+      <!-- Khung Tranh Hiển Thị Ảnh (Hỗ trợ Paste / Kéo thả) -->
+      <div class="result-frame" id="resultFrame" tabindex="0" title="Nhấn vào đây rồi bấm Ctrl + V để dán ảnh từ Gemini Pro">
         <div class="result-placeholder" id="resultPlaceholder">
           <svg style="width:48px; height:48px; margin-bottom:10px; stroke:var(--text-light);" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
             <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
           <p style="font-weight: 600; margin-bottom: 4px;">Khung Trưng Bày Phục Trang</p>
-          <span style="font-size: 0.75rem; opacity: 0.85;">Bấm nút bên dưới để dệt họa phục trang tự động</span>
+          <span style="font-size: 0.72rem; opacity: 0.85;">Nhấn <strong>Ctrl + V</strong> hoặc kéo thả ảnh từ Gemini vào đây</span>
         </div>
         <img id="generatedImg" alt="Phục trang Việt Nam AI" />
       </div>
 
-      <!-- Nút Bấm Khởi Tạo Ảnh -->
-      <button class="btn-generate" id="btnGenerate">
-        <span>✨ Dệt Họa Trang Phục Tự Động</span>
+      <button class="btn-generate" id="btnOpenGemini">
+        <span>🚀 Mở Gemini Pro & Dán Prompt</span>
       </button>
 
       <div class="result-actions" style="margin-top: 14px;">
         <button class="btn-secondary" id="btnDownload" style="display:none;">Tải Ảnh Về Máy</button>
         <button class="btn-secondary" id="btnCopyPrompt">Sao Chép Prompt</button>
+        <label class="btn-secondary" style="text-align: center; cursor: pointer;">
+          Tải Ảnh Lên
+          <input type="file" id="fileUpload" accept="image/*" style="display: none;" />
+        </label>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ Logic Tự Động Tạo Và Trả Ảnh Về Website ═════════════════════ -->
+<!-- ═══ Logic Điều Khiển & Cầu Nối Gemini Pro ═════════════════════════ -->
 <script>
 (function(){
-  // 1. Quản lý tương tác chọn nút
+  // 1. Quản lý tương tác các nút chọn
   function setupButtonGroup(containerId, onChange) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -1049,7 +1063,139 @@
     return activeBtn ? (activeBtn.getAttribute('data-prompt') || activeBtn.getAttribute('data-val')) : '';
   }
 
-  // 2. Ghép Prompt phân tầng chi tiết: Khóa chặt góc máy toàn thân (Full-body)
+  // 2. Cấu trúc Prompt phân tầng chuẩn Imagen 3 của Gemini Pro
+  function buildPrompt() {
+    const gender = getActiveVal('genderGrid');
+    const subject = gender === 'man' ? 'Vietnamese handsome young man' : 'Vietnamese elegant young woman';
+    const top = getActiveVal('topGrid');
+    const bottom = getActiveVal('bottomGrid');
+    const accessory = getActiveVal('accGrid');
+    const scene = getActiveVal('sceneGrid');
+
+    return `Create an image: A high-end cinematic full-body fashion photography of a graceful ${subject}, standing head-to-toe in camera frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Setting and atmosphere: ${scene}. Cultural fashion aesthetics, editorial magazine lookbook, authentic textiles, crisp sharp fabric textures, natural soft lighting, 8k resolution, realistic human anatomy, highly detailed photorealistic masterpiece.`;
+  }
+
+  const promptPreview = document.getElementById('promptPreview');
+  function updatePromptDisplay() {
+    if (promptPreview) promptPreview.innerText = buildPrompt();
+  }
+
+  ['genderGrid', 'topGrid', 'bottomGrid', 'accGrid', 'sceneGrid'].forEach(id => {
+    setupButtonGroup(id, updatePromptDisplay);
+  });
+  updatePromptDisplay();
+
+  // 3. Sao chép Prompt thủ công
+  document.getElementById('btnCopyPrompt').addEventListener('click', () => {
+    navigator.clipboard.writeText(promptPreview.innerText).then(() => {
+      alert('Đã sao chép prompt vào bộ nhớ tạm!');
+    });
+  });
+
+  // 4. Mở Gemini Pro và tự động copy Prompt
+  const btnOpenGemini = document.getElementById('btnOpenGemini');
+  btnOpenGemini.addEventListener('click', () => {
+    const promptText = buildPrompt();
+    navigator.clipboard.writeText(promptText).then(() => {
+      window.open('https://gemini.google.com/app', '_blank');
+    }).catch(() => {
+      window.open('https://gemini.google.com/app', '_blank');
+    });
+  });
+
+  // 5. Cơ chế đưa ảnh từ Clipboard (Ctrl + V) hoặc kéo thả vào website
+  const resultFrame = document.getElementById('resultFrame');
+  const resultPlaceholder = document.getElementById('resultPlaceholder');
+  const generatedImg = document.getElementById('generatedImg');
+  const btnDownload = document.getElementById('btnDownload');
+  const fileUpload = document.getElementById('fileUpload');
+
+  function displayImage(sourceUrl) {
+    generatedImg.src = sourceUrl;
+    generatedImg.style.display = 'block';
+    resultPlaceholder.style.display = 'none';
+    btnDownload.style.display = 'block';
+
+    btnDownload.onclick = () => {
+      const a = document.createElement('a');
+      a.href = sourceUrl;
+      a.download = `viet-phuc-gemini-pro-${Date.now()}.png`;
+      a.click();
+    };
+  }
+
+  // Lắng nghe sự kiện Paste (Ctrl + V) trên toàn trang web
+  window.addEventListener('paste', (e) => {
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    for (const item of items) {
+      if (item.type.indexOf('image') !== -1) {
+        const file = item.getAsFile();
+        const reader = new FileReader();
+        reader.onload = (event) => displayImage(event.target.result);
+        reader.readAsDataURL(file);
+        break;
+      }
+    }
+  });
+
+  // Kéo và thả file ảnh vào khung
+  resultFrame.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    resultFrame.style.borderColor = 'var(--petal-accent)';
+  });
+
+  resultFrame.addEventListener('dragleave', () => {
+    resultFrame.style.borderColor = 'rgba(17, 94, 89, 0.25)';
+  });
+
+  resultFrame.addEventListener('drop', (e) => {
+    e.preventDefault();
+    resultFrame.style.borderColor = 'rgba(17, 94, 89, 0.25)';
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const file = e.dataTransfer.files[0];
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => displayImage(event.target.result);
+        reader.readAsDataURL(file);
+      }
+    }
+  });
+
+  // Tải file trực tiếp từ máy
+  fileUpload.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => displayImage(event.target.result);
+      reader.readAsDataURL(file);
+    }
+  });
+})();
+</script>
+
+<!-- ═══ Logic Điều Khiển & Tự Động Sinh Ảnh Trong Trang ═══════════════ -->
+<script>
+(function(){
+  // 1. Quản lý tương tác chọn trang phục
+  function setupButtonGroup(containerId, onChange) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const buttons = container.querySelectorAll('.pill-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (onChange) onChange();
+      });
+    });
+  }
+
+  function getActiveVal(containerId) {
+    const activeBtn = document.querySelector(`#${containerId} .pill-btn.active`);
+    return activeBtn ? (activeBtn.getAttribute('data-prompt') || activeBtn.getAttribute('data-val')) : '';
+  }
+
+  // 2. Cơ chế ghép Prompt phân tầng chuẩn Full-body
   function buildPrompt() {
     const gender = getActiveVal('genderGrid');
     const subject = gender === 'man' ? 'Vietnamese handsome young man' : 'Vietnamese elegant young woman';
@@ -1071,48 +1217,47 @@
   });
   updatePromptDisplay();
 
-  // 3. Nút sao chép prompt
-  const btnCopyPrompt = document.getElementById('btnCopyPrompt');
-  if (btnCopyPrompt) {
-    btnCopyPrompt.addEventListener('click', () => {
+  // 3. Nút Sao Chép Prompt
+  const btnCopy = document.getElementById('btnCopyPrompt');
+  if (btnCopy) {
+    btnCopy.addEventListener('click', () => {
       navigator.clipboard.writeText(promptPreview.innerText).then(() => {
         alert('Đã sao chép prompt vào bộ nhớ tạm!');
       });
     });
   }
 
-  // 4. Xử lý Tự động gửi lệnh sinh ảnh & Render thẳng vào website
-  const btnGenerate = document.getElementById('btnGenerate');
+  // 4. Xử lý Tự động sinh ảnh và hiển thị thẳng vào khung tranh
+  const btnGenerate = document.getElementById('btnGenerate') || document.getElementById('btnOpenGemini');
   const loader = document.getElementById('resultLoader');
   const placeholder = document.getElementById('resultPlaceholder');
   const generatedImg = document.getElementById('generatedImg');
   const btnDownload = document.getElementById('btnDownload');
 
   if (btnGenerate) {
+    btnGenerate.innerHTML = '<span>✨ Dệt Họa Trang Phục Tự Động</span>';
     btnGenerate.addEventListener('click', () => {
       const promptText = buildPrompt();
 
-      // Hiển thị trạng thái đang vẽ
+      // Hiển thị trạng thái đang xử lý
       btnGenerate.disabled = true;
       btnGenerate.innerHTML = '<span>🌸 Đang dệt họa trang phục...</span>';
-      if (loader) loader.style.display = 'block';
-      if (placeholder) placeholder.style.display = 'none';
-      if (generatedImg) generatedImg.style.display = 'none';
+      loader.style.display = 'block';
+      placeholder.style.display = 'none';
+      generatedImg.style.display = 'none';
       if (btnDownload) btnDownload.style.display = 'none';
 
-      // Tạo seed ngẫu nhiên để mỗi lần bấm sinh ra góc ảnh mới
+      // Tạo URL ngẫu nhiên tránh cache
       const seed = Math.floor(Math.random() * 9999999);
       const encodedPrompt = encodeURIComponent(promptText);
       const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=768&height=1024&model=flux&nologo=true&seed=${seed}`;
 
-      // Nạp ảnh trực tiếp vào thẻ img
+      // Tải và hiển thị ảnh trực tiếp lên trang web
       const img = new Image();
       img.onload = () => {
-        if (generatedImg) {
-          generatedImg.src = imageUrl;
-          generatedImg.style.display = 'block';
-        }
-        if (loader) loader.style.display = 'none';
+        generatedImg.src = imageUrl;
+        generatedImg.style.display = 'block';
+        loader.style.display = 'none';
         btnGenerate.disabled = false;
         btnGenerate.innerHTML = '<span>✨ Dệt Họa Trang Phục Tự Động</span>';
 
@@ -1129,13 +1274,11 @@
       };
 
       img.onerror = () => {
-        if (loader) loader.style.display = 'none';
+        loader.style.display = 'none';
         btnGenerate.disabled = false;
         btnGenerate.innerHTML = '<span>✨ Dệt Họa Trang Phục Tự Động</span>';
-        if (placeholder) {
-          placeholder.style.display = 'block';
-          placeholder.innerHTML = '<p style="color:#b91c1c;">⚠️ Kết nối bị gián đoạn, vui lòng bấm thử lại!</p>';
-        }
+        placeholder.style.display = 'block';
+        placeholder.innerHTML = '<p style="color:#b91c1c;">⚠️ Không thể kết nối máy chủ tạo ảnh. Vui lòng thử lại!</p>';
       };
 
       img.src = imageUrl;
