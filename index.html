@@ -894,11 +894,260 @@
     @media (max-width: 900px) {
       .studio-grid { grid-template-columns: 1fr; }
     }
+
+    /* ─── Occasion Pills ──────────────────────────────────────────── */
+    .occasion-pill {
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      background: rgba(250, 245, 255, 0.7);
+      padding: 8px 14px;
+      border-radius: 24px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-ui);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .occasion-pill:hover {
+      border-color: #a855f7;
+      background: rgba(245, 235, 255, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.18);
+    }
+
+    .occasion-pill.active {
+      background: linear-gradient(135deg, #6d28d9, #a855f7);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(109, 40, 217, 0.3);
+    }
+
+    /* ─── Custom Idea Textarea ────────────────────────────────────── */
+    .custom-idea-wrap {
+      margin-top: 6px;
+    }
+
+    .custom-idea-textarea {
+      width: 100%;
+      min-height: 72px;
+      padding: 10px 14px;
+      border: 1.5px solid rgba(168, 85, 247, 0.3);
+      border-radius: 12px;
+      font-size: 0.82rem;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      color: var(--text-ui);
+      background: rgba(250, 245, 255, 0.8);
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      line-height: 1.55;
+    }
+
+    .custom-idea-textarea:focus {
+      border-color: #a855f7;
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+      background: rgba(255, 252, 255, 0.95);
+    }
+
+    .custom-idea-textarea::placeholder {
+      color: rgba(100, 80, 130, 0.5);
+      font-style: italic;
+    }
+
+    .idea-char-hint {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      opacity: 0.7;
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    /* Divider before occasion section */
+    .section-divider {
+      border: none;
+      border-top: 1px dashed rgba(168, 85, 247, 0.25);
+      margin: 18px 0 20px;
+    }
+
+    /* ─── Bà Nội AI Mascot ────────────────────────────────────────── */
+    #ba-noi-mascot {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9990;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .ba-noi-bubble {
+      position: relative;
+      max-width: 280px;
+      background: linear-gradient(145deg, #fffbf0, #fff9ed);
+      border: 1.5px solid #f0c070;
+      border-radius: 18px 18px 4px 18px;
+      padding: 14px 16px 12px;
+      box-shadow: 0 8px 28px rgba(180, 120, 30, 0.18), 0 2px 8px rgba(0,0,0,0.06);
+      pointer-events: all;
+      transform: translateY(12px) scale(0.92);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    }
+    .ba-noi-bubble.visible {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .ba-noi-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: 22px;
+      width: 0; height: 0;
+      border-left: 10px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 10px solid #f0c070;
+    }
+    .ba-noi-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 23px;
+      width: 0; height: 0;
+      border-left: 9px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 9px solid #fffbf0;
+      z-index: 1;
+    }
+    .ba-noi-bubble-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .ba-noi-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #92580a;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ba-noi-close {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(180, 120, 30, 0.3);
+      background: rgba(255,255,255,0.8);
+      color: #92580a;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .ba-noi-close:hover { background: #92580a; color: #fff; }
+
+    .ba-noi-warning {
+      font-size: 0.8rem;
+      color: #5c3d0a;
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .ba-noi-suggestion {
+      background: linear-gradient(135deg, rgba(184,232,200,0.5), rgba(168,220,232,0.4));
+      border: 1px solid rgba(17, 94, 89, 0.2);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 0.77rem;
+      color: #115e59;
+      line-height: 1.5;
+    }
+    .ba-noi-suggestion-label {
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 3px;
+      color: #0f766e;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .ba-noi-avatar {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #fef3c7, #fde68a);
+      border: 2.5px solid #f0c070;
+      box-shadow: 0 6px 20px rgba(180, 120, 30, 0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+      cursor: pointer;
+      pointer-events: all;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      user-select: none;
+      position: relative;
+    }
+    .ba-noi-avatar:hover {
+      transform: scale(1.1) rotate(-5deg);
+      box-shadow: 0 10px 28px rgba(180, 120, 30, 0.35);
+    }
+    @keyframes baNoi-idle {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      30%       { transform: translateY(-4px) rotate(-3deg); }
+      60%       { transform: translateY(-2px) rotate(2deg); }
+    }
+    .ba-noi-avatar.idle { animation: baNoi-idle 3.5s ease-in-out infinite; }
+    .ba-noi-avatar.idle:hover { animation: none; }
+
+    @keyframes baNoi-ping {
+      0%   { transform: scale(1); box-shadow: 0 0 0 0 rgba(240,192,112,0.7); }
+      60%  { transform: scale(1.14); box-shadow: 0 0 0 14px rgba(240,192,112,0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(240,192,112,0); }
+    }
+    .ba-noi-avatar.ping { animation: baNoi-ping 0.65s ease-out forwards; }
+
+    .ba-noi-dot {
+      position: absolute;
+      top: 2px; right: 2px;
+      width: 13px; height: 13px;
+      background: #ef4444;
+      border-radius: 50%;
+      border: 2.5px solid #fef3c7;
+      display: none;
+    }
+    .ba-noi-dot.show { display: block; }
+
+    @media (max-width: 480px) {
+      #ba-noi-mascot { bottom: 16px; right: 12px; }
+      .ba-noi-bubble { max-width: 230px; }
+    }
   </style>
 <body>
 
 <!-- ═══ Background Canvas ═════════════════════════════════════════════ -->
 <canvas id="bg-canvas"></canvas>
+
+<!-- ═══ Bà Nội AI — Mascot Cảnh Báo Văn Hóa ════════════════════════ -->
+<div id="ba-noi-mascot">
+  <!-- Speech bubble (ẩn mặc định) -->
+  <div class="ba-noi-bubble" id="baNoiBubble">
+    <div class="ba-noi-bubble-header">
+      <span class="ba-noi-name">👵 Bà Nội nói...</span>
+      <button class="ba-noi-close" id="baNoiClose" aria-label="Đóng">×</button>
+    </div>
+    <p class="ba-noi-warning" id="baNoiWarning"></p>
+    <div class="ba-noi-suggestion" id="baNoiSuggestion">
+      <div class="ba-noi-suggestion-label">✨ Bà gợi ý cho cháu nè:</div>
+      <span id="baNoiSuggestionText"></span>
+    </div>
+  </div>
+
+  <!-- Avatar -->
+  <div class="ba-noi-avatar idle" id="baNoiAvatar" title="Bà Nội AI — Trợ lý văn hóa">
+    👵
+    <div class="ba-noi-dot" id="baNoiDot"></div>
+  </div>
+</div>
 
 <!-- ═══ Traditional Cloud & Wave Motifs (họa vân mây sóng nước) ═══════
      Extremely faint, decorative cultural texture layer.
@@ -1186,19 +1435,60 @@
         </div>
       </div>
 
-      <!-- 5. Bối cảnh (Setting) -->
+      <!-- 5. Thời tiết -->
       <div class="control-group">
-        <label class="control-label">5. Bối cảnh không gian</label>
+        <label class="control-label">5. Thời tiết & Ánh sáng</label>
         <div class="pill-grid" id="sceneGrid">
-          <button class="pill-btn active" data-prompt="standing in the ancient courtyard of Hue Imperial Citadel with mossy royal walls and golden hour sunlight">Đại Nội Huế Cổ Kính</button>
-          <button class="pill-btn" data-prompt="walking through ancient Hoi An ancient town surrounded by glowing lanterns and bougainvillea blossoms">Phố Cổ Hội An Lung Linh</button>
-          <button class="pill-btn" data-prompt="beside a misty lotus pond at dawn with blooming pink flowers and serene water ripples">Hồ Sen Sáng Sớm</button>
-          <button class="pill-btn" data-prompt="on a bustling contemporary city pedestrian promenade in Hanoi with subtle urban architecture">Phố Thị Đương Đại</button>
-          <button class="pill-btn" data-prompt="in a high-fashion artistic studio with clean minimalist background and dramatic cinematic editorial lighting">Studio Nghệ Thuật</button>
+          <button class="pill-btn active" data-prompt="bathed in warm golden hour sunlight, long soft shadows, glowing amber light casting a dreamy haze">☀️ Nắng Vàng Chiều Tà</button>
+          <button class="pill-btn" data-prompt="under soft overcast daylight with even diffused lighting, gentle cool tones and no harsh shadows">☁️ Trời Mây Dịu Nhẹ</button>
+          <button class="pill-btn" data-prompt="in light rain, delicate raindrops on fabric, wet reflective ground, moody atmospheric humidity">🌧️ Mưa Nhỏ Lãng Mạn</button>
+          <button class="pill-btn" data-prompt="surrounded by morning mist and fog, soft ethereal glow filtering through haze, serene mystical atmosphere">🌫️ Sương Mù Huyền Ảo</button>
+          <button class="pill-btn" data-prompt="under dramatic stormy sky with dynamic cloud formations, strong contrast lighting with occasional lightning shimmer">⛈️ Bầu Trời Dông Tố</button>
+          <button class="pill-btn" data-prompt="in crisp cool autumn breeze, fallen leaves drifting gently, warm amber and russet tones in the air">🍂 Gió Thu Se Lạnh</button>
+          <button class="pill-btn" data-prompt="under a brilliant clear blue sky at midday, vivid saturated colors, sharp defined shadows, vibrant energy">🌤️ Trưa Nắng Rực Rỡ</button>
+          <button class="pill-btn" data-prompt="at blue hour dusk, soft twilight gradient from deep blue to violet, glowing city lights beginning to appear">🌆 Hoàng Hôn Tím Biếc</button>
+        </div>
+      </div>
+
+
+      <!-- 6. Thời điểm sử dụng (Occasion) -->
+      <hr class="section-divider" />
+      <div class="control-group">
+        <label class="control-label">
+          <span>🗓️</span> 6. Thời điểm sử dụng
+        </label>
+        <div class="pill-grid" id="occasionGrid">
+          <button class="occasion-pill active" data-prompt="festive Vietnamese Lunar New Year Tet holiday celebration, surrounded by peach blossoms and red lanterns, joyful and auspicious atmosphere">🎆 Lễ Tết Nguyên Đán</button>
+          <button class="occasion-pill" data-prompt="elegant graduation yearbook photoshoot, meaningful commemorative portrait, soft nostalgic atmosphere">🎓 Kỷ Yếu Tốt Nghiệp</button>
+          <button class="occasion-pill" data-prompt="fine art fashion photography session, creative artistic editorial concept, intentional dramatic lighting">📷 Chụp Ảnh Nghệ Thuật</button>
+          <button class="occasion-pill" data-prompt="vibrant traditional Vietnamese cultural festival, lively folk art performances, colorful festive crowd and dragon decorations">🎡 Hội / Festival Văn Hóa</button>
+          <button class="occasion-pill" data-prompt="visiting a prestigious Vietnamese history museum or heritage exhibition, reverent and culturally immersive atmosphere">🏛️ Thăm Bảo Tàng</button>
+          <button class="occasion-pill" data-prompt="enchanting Vietnamese traditional wedding ceremony, luxurious ceremonial hall with golden floral arrangements and candlelight">💍 Đám Cưới Truyền Thống</button>
+          <button class="occasion-pill" data-prompt="casual elegant street style look, relaxed weekend stroll in a charming Vietnamese city neighborhood">🚶 Dạo Phố Cuối Tuần</button>
+          <button class="occasion-pill" data-prompt="formal diplomatic cultural exchange event or traditional performing arts gala, prestigious stage atmosphere">🎭 Sự Kiện Ngoại Giao</button>
+        </div>
+      </div>
+
+      <!-- 7. Idea riêng của bạn -->
+      <div class="control-group">
+        <label class="control-label">
+          <span>✍️</span> 7. Idea riêng của bạn
+        </label>
+        <div class="custom-idea-wrap">
+          <textarea
+            id="customIdeaInput"
+            class="custom-idea-textarea"
+            maxlength="300"
+            placeholder="Ví dụ: Đứng trên đỉnh núi Fansipan trong sương sớm, cầm ô hoa sen, nhìn ra biển mây bồng bềnh... Thêm bất kỳ ý tưởng nào bạn muốn AI thể hiện!"
+          ></textarea>
+          <div class="idea-char-hint">
+            <span id="ideaCharCount">0</span>/300 ký tự
+          </div>
         </div>
       </div>
 
       <!-- Hướng dẫn đồng bộ -->
+
       <div style="background: rgba(255,255,255,0.6); padding: 14px; border-radius: 12px; font-size: 0.8rem; color: var(--text-ui); line-height: 1.6; border: 1px dashed var(--petal-accent);">
         <strong>✦ Quy trình đồng bộ với tài khoản Gemini Pro:</strong>
         <ol style="padding-left: 18px; margin-top: 6px;">
@@ -1243,14 +1533,220 @@
   </div>
 </section>
 
+<!-- ═══ Bà Nội AI — Script Logic Cảnh Báo Văn Hóa ══════════════════ -->
+<script>
+(function () {
+  /* ── Elements ─────────────────────────────────────────────────────── */
+  const avatar   = document.getElementById('baNoiAvatar');
+  const bubble   = document.getElementById('baNoiBubble');
+  const dot      = document.getElementById('baNoiDot');
+  const warnEl   = document.getElementById('baNoiWarning');
+  const sugEl    = document.getElementById('baNoiSuggestionText');
+  const closeBtn = document.getElementById('baNoiClose');
+
+  if (!avatar) return;
+
+  /* ── State ─────────────────────────────────────────────────────────── */
+  let bubbleOpen      = false;
+  let currentRuleKey  = null;
+
+  /* ── Rule Table ────────────────────────────────────────────────────
+     key: mã định danh rule (để tránh nhảy liên tục)
+     match(top, bottom, acc, occasion): trả true nếu combo vi phạm
+     warning: lời bà nội nói nhẹ nhàng
+     suggestion: gợi ý phối đồ cụ thể hơn
+  ─────────────────────────────────────────────────────────────────── */
+  const RULES = [
+    {
+      key: 'nhat-binh-sneaker',
+      match: (top, acc) =>
+        top.includes('Nhat Binh') &&
+        (acc.includes('sneaker') || acc.includes('sunglasses')),
+      warning: 'Cháu ơi 😄 Áo Nhật Bình là lễ phục cung đình cao quý của phi tần triều Nguyễn — thường chỉ xuất hiện trong đại lễ, kỷ yếu trang trọng. Mà cháu lại phối với sneaker thì... bà thấy vui vui nhưng mà lệch lệch á!',
+      suggestion: 'Với Áo Nhật Bình, bà thấy hợp nhất là đi hài thêu hoa sen, thêm Kiềng Bạc Chạm Trổ, chụp trong không khí Lễ Tết hoặc Kỷ Yếu cho đúng chất cung đình nè cháu! 👑'
+    },
+    {
+      key: 'nhat-binh-jeans',
+      match: (top, bottom) =>
+        top.includes('Nhat Binh') && bottom.includes('jeans'),
+      warning: 'Ủa cháu ơi 😅 Áo Nhật Bình ngũ sắc của bà phi mà kết hợp với jeans xanh... Bà không phán xét đâu, nhưng mà lịch sử nó không "đồng ý" lắm ha! Nhật Bình là y phục triều nghi cao cấp nhất nhé.',
+      suggestion: 'Cháu thử Quần Lụa Đen Tuyền hoặc Quần Lụa Trắng Ống Rộng đi — nhìn sẽ sang trọng và đúng với nguồn gốc lịch sử của bộ đồ hơn nhiều á! ✨'
+    },
+    {
+      key: 'giao-linh-hien-dai',
+      match: (top, bottom, acc) =>
+        top.includes('Giao Linh') &&
+        (bottom.includes('jeans') || bottom.includes('A-line') || acc.includes('sneaker')),
+      warning: 'Hehe bà biết cháu sáng tạo 😊 Nhưng Áo Giao Lĩnh là trang phục thế kỷ 13 thời Lý–Trần nghen — thời đó chưa có quần jeans hay chân váy xếp ly đâu cháu! Ghép vào có thể tạo nhầm lẫn về lịch sử.',
+      suggestion: 'Giao Lĩnh đẹp nhất khi phối với Quần Lụa Trắng Ống Rộng, thêm Kiềng Bạc Chạm Trổ — chụp trong thời tiết Sương Mù Huyền Ảo sẽ ra ảnh rất thần thánh đó cháu! 🌫️'
+    },
+    {
+      key: 'tu-than-hien-dai',
+      match: (top, acc) =>
+        top.includes('Tu Than') &&
+        (acc.includes('sunglasses') || acc.includes('sneaker')),
+      warning: 'Bà thấy cháu mạnh dạn quá 😄 Áo Tứ Thân là hồn của người phụ nữ Kinh Bắc xưa — gắn liền với ruộng đồng, hội hè dân gian. Phối với kính râm hay sneaker thì... bà cảm giác nó "trật chiều" một chút đó!',
+      suggestion: 'Tứ Thân hợp với Quạt Trầm Hương hoặc Khăn Đóng / Khăn Xếp nhất cháu ơi! Chụp trong dịp Hội / Festival Văn Hóa sẽ ra đúng không khí dân gian mà vẫn tươi trẻ! 🎡'
+    },
+    {
+      key: 'ao-tac-sneaker',
+      match: (top, acc) =>
+        top.includes('Ao Tac') && acc.includes('sneaker'),
+      warning: 'Áo Tấc Cổ Phong là lễ phục quan lại, truyền giáo thời xưa — trang nghiêm lắm cháu ơi! Bà thấy nó hơi "trái khoáy" khi đi với sneaker, giống như mặc vest đi dép lê vậy đó 😄',
+      suggestion: 'Áo Tấc hợp nhất với Quần Lụa Đen Tuyền và Khăn Đóng / Khăn Xếp — phối thêm dịp Sự Kiện Ngoại Giao hoặc Đám Cưới Truyền Thống sẽ ra đúng vị quan triều đình đó! 🏛️'
+    },
+    {
+      key: 'dam-cuoi-gau',
+      match: (top, bottom, acc, occasion) =>
+        occasion.includes('wedding') &&
+        (acc.includes('sneaker') || acc.includes('sunglasses') || bottom.includes('jeans')),
+      warning: 'Cháu ơi, dịp đám cưới truyền thống mà bà thấy combo này hơi nhẹ nhàng quá ha 😄 Đám cưới Việt mình trọng lễ nghi lắm — trang phục nên đủ trang trọng để tôn vinh dịp đặc biệt đó cháu!',
+      suggestion: 'Với đám cưới truyền thống, bà thấy Áo Dài Lụa + Quần Lụa Trắng + Kiềng Bạc hoặc Áo Nhật Bình + Quần Lụa Đen là chuẩn nhất! Vừa đẹp vừa đúng nề nếp! 💍'
+    },
+    {
+      key: 'yem-cuoi',
+      match: (top, occasion) =>
+        (top.includes('Yem Lua Dao') || top.includes('croptop')) &&
+        occasion.includes('wedding'),
+      warning: 'Ủa cháu định mặc Áo Yếm đi đám cưới à 😂 Áo Yếm là nét đẹp dân dã của thôn quê xưa — bình thường thì duyên lắm, nhưng đám cưới trọng đại mặc vậy bà sợ... nhà trai hiểu lầm đó nha!',
+      suggestion: 'Cho đám cưới, cháu thử Áo Dài Lụa Cổ Điển hoặc Áo Nhật Bình Cung Đình — vừa đẹp vừa trang trọng, đúng nghi lễ Việt hơn nhiều! Bà thấy cháu mặc cái nào cũng xinh á! 💕'
+    },
+  ];
+
+  /* ── Helper: đọc nút đang active theo selector ──────────────────── */
+  function readActive(gridId, selector) {
+    const btn = document.querySelector(`#${gridId} ${selector}.active`);
+    return btn ? (btn.getAttribute('data-prompt') || btn.getAttribute('data-val') || '') : '';
+  }
+
+  /* ── Kiểm tra toàn bộ rules và trả về rule đầu tiên vi phạm ──────── */
+  function checkRules() {
+    const top      = readActive('topGrid',      '.pill-btn');
+    const bottom   = readActive('bottomGrid',   '.pill-btn');
+    const acc      = readActive('accGrid',      '.pill-btn');
+    const occasion = readActive('occasionGrid', '.occasion-pill');
+
+    for (const rule of RULES) {
+      if (rule.match(top, bottom, acc, occasion)) return rule;
+    }
+    return null;
+  }
+
+  /* ── Hiển thị bubble ─────────────────────────────────────────────── */
+  function showBubble(rule) {
+    warnEl.textContent  = rule.warning;
+    sugEl.textContent   = rule.suggestion;
+    bubble.classList.add('visible');
+    dot.classList.remove('show');
+    bubbleOpen = true;
+  }
+
+  /* ── Ẩn bubble ───────────────────────────────────────────────────── */
+  function hideBubble() {
+    bubble.classList.remove('visible');
+    bubbleOpen = false;
+  }
+
+  /* ── Ping avatar rồi hiện dot đỏ ────────────────────────────────── */
+  function alertAvatar() {
+    avatar.classList.remove('idle', 'ping');
+    void avatar.offsetWidth; // reflow để restart animation
+    avatar.classList.add('ping');
+    dot.classList.add('show');
+    setTimeout(() => {
+      avatar.classList.remove('ping');
+      avatar.classList.add('idle');
+    }, 700);
+  }
+
+  /* ── Main: chạy mỗi khi người dùng đổi lựa chọn ─────────────────── */
+  function evaluate() {
+    const rule = checkRules();
+    if (rule) {
+      if (rule.key !== currentRuleKey) {
+        currentRuleKey = rule.key;
+        if (bubbleOpen) showBubble(rule); // cập nhật nội dung nếu bubble đang mở
+        alertAvatar();
+      }
+    } else {
+      // Không còn vi phạm
+      if (currentRuleKey !== null) {
+        currentRuleKey = null;
+        hideBubble();
+        dot.classList.remove('show');
+      }
+    }
+  }
+
+  /* ── Avatar click: toggle bubble hoặc hiện nội dung rule hiện tại ── */
+  avatar.addEventListener('click', () => {
+    if (bubbleOpen) {
+      hideBubble();
+    } else {
+      const rule = checkRules();
+      if (rule) {
+        showBubble(rule);
+      } else {
+        // Không có vi phạm — bà khen!
+        warnEl.textContent = 'Bà xem qua rồi, combo cháu chọn hôm nay ổn lắm! Hài hòa, đúng nguồn gốc mà vẫn có nét riêng — bà thích! 🎉';
+        sugEl.textContent  = 'Cứ phối tiếp đi nha! Khi nào cần bà tư vấn thì bấm vào bà 😄';
+        bubble.classList.add('visible');
+        bubbleOpen = true;
+        dot.classList.remove('show');
+      }
+    }
+  });
+
+  /* ── Đóng bubble ─────────────────────────────────────────────────── */
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hideBubble();
+  });
+
+  /* ── Hook vào tất cả pill buttons + occasion pills + textarea ──────── */
+  function hookAll() {
+    document.querySelectorAll(
+      '#topGrid .pill-btn, #bottomGrid .pill-btn, #accGrid .pill-btn, #occasionGrid .occasion-pill'
+    ).forEach(btn => btn.addEventListener('click', () => setTimeout(evaluate, 50)));
+
+    const textarea = document.getElementById('customIdeaInput');
+    if (textarea) textarea.addEventListener('input', () => setTimeout(evaluate, 100));
+  }
+
+  // Đợi DOM ổn định rồi hook
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hookAll);
+  } else {
+    hookAll();
+  }
+
+  // Chạy lần đầu sau khi trang load xong
+  setTimeout(evaluate, 800);
+})();
+</script>
+
 <!-- ═══ Logic Điều Khiển & Cầu Nối Gemini Pro ═════════════════════════ -->
 <script>
 (function(){
-  // 1. Quản lý tương tác các nút chọn
+  // 1. Quản lý tương tác các nút chọn (pill-btn)
   function setupButtonGroup(containerId, onChange) {
     const container = document.getElementById(containerId);
     if (!container) return;
     const buttons = container.querySelectorAll('.pill-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (onChange) onChange();
+      });
+    });
+  }
+
+  // Quản lý tương tác các nút chọn dịp (occasion-pill)
+  function setupOccasionGroup(containerId, onChange) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const buttons = container.querySelectorAll('.occasion-pill');
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('active'));
@@ -1265,6 +1761,11 @@
     return activeBtn ? (activeBtn.getAttribute('data-prompt') || activeBtn.getAttribute('data-val')) : '';
   }
 
+  function getActiveOccasion() {
+    const activeBtn = document.querySelector('#occasionGrid .occasion-pill.active');
+    return activeBtn ? (activeBtn.getAttribute('data-prompt') || '') : '';
+  }
+
   // 2. Cấu trúc Prompt phân tầng chuẩn Imagen 3 của Gemini Pro
   function buildPrompt() {
     const gender = getActiveVal('genderGrid');
@@ -1273,8 +1774,16 @@
     const bottom = getActiveVal('bottomGrid');
     const accessory = getActiveVal('accGrid');
     const scene = getActiveVal('sceneGrid');
+    const occasion = getActiveOccasion();
+    const customIdea = (document.getElementById('customIdeaInput') || {}).value || '';
 
-    return `Create an image: A high-end cinematic full-body fashion photography of a graceful ${subject}, standing head-to-toe in camera frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Setting and atmosphere: ${scene}. Cultural fashion aesthetics, editorial magazine lookbook, authentic textiles, crisp sharp fabric textures, natural soft lighting, 8k resolution, realistic human anatomy, highly detailed photorealistic masterpiece.`;
+    let prompt = `Create an image: A high-end cinematic full-body fashion photography of a graceful ${subject}, standing head-to-toe in camera frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Weather and lighting: ${scene}.`;
+
+    if (occasion) prompt += ` Occasion context: ${occasion}.`;
+    if (customIdea.trim()) prompt += ` Additional creative concept: ${customIdea.trim()}.`;
+
+    prompt += ` Cultural fashion aesthetics, editorial magazine lookbook, authentic textiles, crisp sharp fabric textures, natural soft lighting, 8k resolution, realistic human anatomy, highly detailed photorealistic masterpiece.`;
+    return prompt;
   }
 
   const promptPreview = document.getElementById('promptPreview');
@@ -1285,7 +1794,20 @@
   ['genderGrid', 'topGrid', 'bottomGrid', 'accGrid', 'sceneGrid'].forEach(id => {
     setupButtonGroup(id, updatePromptDisplay);
   });
+  setupOccasionGroup('occasionGrid', updatePromptDisplay);
+
+  // Textarea "Idea riêng" — cập nhật prompt & đếm ký tự
+  const customIdeaInput = document.getElementById('customIdeaInput');
+  const ideaCharCount = document.getElementById('ideaCharCount');
+  if (customIdeaInput) {
+    customIdeaInput.addEventListener('input', () => {
+      if (ideaCharCount) ideaCharCount.textContent = customIdeaInput.value.length;
+      updatePromptDisplay();
+    });
+  }
+
   updatePromptDisplay();
+
 
   // 3. Sao chép Prompt thủ công
   document.getElementById('btnCopyPrompt').addEventListener('click', () => {
@@ -1397,6 +1919,11 @@
     return activeBtn ? (activeBtn.getAttribute('data-prompt') || activeBtn.getAttribute('data-val')) : '';
   }
 
+  function getActiveOccasion2() {
+    const activeBtn = document.querySelector('#occasionGrid .occasion-pill.active');
+    return activeBtn ? (activeBtn.getAttribute('data-prompt') || '') : '';
+  }
+
   // 2. Cơ chế ghép Prompt phân tầng chuẩn Full-body
   function buildPrompt() {
     const gender = getActiveVal('genderGrid');
@@ -1405,8 +1932,16 @@
     const bottom = getActiveVal('bottomGrid');
     const accessory = getActiveVal('accGrid');
     const scene = getActiveVal('sceneGrid');
+    const occasion = getActiveOccasion2();
+    const customIdea = (document.getElementById('customIdeaInput') || {}).value || '';
 
-    return `A high-end cinematic full-body fashion photography of a graceful ${subject}, standing head-to-toe in camera frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Setting and atmosphere: ${scene}. Cultural fashion aesthetics, editorial magazine lookbook, authentic textiles, crisp sharp fabric textures, natural soft lighting, 8k resolution, realistic human anatomy, highly detailed photorealistic masterpiece.`;
+    let prompt = `A high-end cinematic full-body fashion photography of a graceful ${subject}, standing head-to-toe in camera frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Weather and lighting: ${scene}.`;
+
+    if (occasion) prompt += ` Occasion context: ${occasion}.`;
+    if (customIdea.trim()) prompt += ` Additional creative concept: ${customIdea.trim()}.`;
+
+    prompt += ` Cultural fashion aesthetics, editorial magazine lookbook, authentic textiles, crisp sharp fabric textures, natural soft lighting, 8k resolution, realistic human anatomy, highly detailed photorealistic masterpiece.`;
+    return prompt;
   }
 
   const promptPreview = document.getElementById('promptPreview');
@@ -1418,6 +1953,7 @@
     setupButtonGroup(id, updatePromptDisplay);
   });
   updatePromptDisplay();
+
 
   // 3. Nút Sao Chép Prompt
   const btnCopy = document.getElementById('btnCopyPrompt');
