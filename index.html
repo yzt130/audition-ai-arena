@@ -23,13 +23,22 @@
   /* ─── Tiêu đề Protest Revolution với ánh sáng đom đóm vàng luôn nhấp nháy ─── */
 .hero-title {
   font-family: 'Protest Revolution', sans-serif !important;
-  font-size: clamp(3.8rem, 8.5vw, 6.8rem) !important;
-  font-weight: 400 !important;
-  line-height: 1.25 !important;
-  letter-spacing: 0.04em !important;
-  display: inline-block;
-  color: #fde047; /* Sắc vàng tươi làm nền */
-  animation: fireflyGlow 3s ease-in-out infinite !important;
+  font-size: clamp(4.5rem, 10vw, 8rem) !important;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.18;
+  letter-spacing: 0.03em;
+  
+  /* Màu xanh ngọc bích đậm cổ phong */
+  color: #0d5c56 !important;
+  
+  /* Đổ bóng sáng dịu giúp chữ nổi bật và tách khỏi nền */
+  text-shadow: 
+    0 2px 10px rgba(255, 255, 255, 0.8),
+    0 4px 18px rgba(13, 92, 86, 0.25) !important;
+    
+  animation: titleAppear 2s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  margin-bottom: 12px;
 }
 
 /* ─── Hiệu ứng nhịp sáng đom đóm lập lòe huyền ảo ─── */
@@ -209,20 +218,6 @@
       justify-content: center;
       padding: 100px 20px 60px;
       gap: 0;
-    }
-
-    .hero-title {
-      font-family: 'Ballet', cursive;
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      font-weight: 400;
-      text-align: center;
-      line-height: 1.2;
-      letter-spacing: 0.02em;
-      color: #731818; /* Deep Maroon / Đỏ bã trầu */
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Soft text-shadow */
-      filter: drop-shadow(0 2px 10px rgba(115, 24, 24, 0.2));
-      animation: titleAppear 2s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-      margin-bottom: 8px;
     }
 
     /* ─── Lotus SVG Stage ─────────────────────────────────────────── */
@@ -1637,15 +1632,25 @@
 }
 
   /* ─── 1. Tiêu đề "Khơi nguồn dân tộc": Font Pacifico, to bản & nổi bật ─── */
+/* ─── Tiêu đề "Khơi nguồn dân tộc" chuẩn duy nhất ─── */
 .hero-title {
-  font-family: 'Protest Revolution', cursive !important;
-  font-size: clamp(4rem, 8.5vw, 7.2rem) !important;
-  font-weight: 400 !important;
+  font-family: 'Protest Revolution', sans-serif !important;
+  font-size: clamp(3.8rem, 7vw, 6rem) !important;
+  font-weight: 350 !important;
+  text-align: center !important;
   line-height: 1 !important;
-  letter-spacing: 0.02em !important;
-  text-transform: none !important;
-  color: #731818 !important;
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.12) !important;
+  letter-spacing: 0.03em !important;
+  
+  /* Sắc xanh ngọc bích cổ phong */
+  color: #0d5c56 !important;
+  
+  /* Quầng sáng trắng dịu giúp chữ tách bạch khỏi nền tranh */
+  text-shadow: 
+    0 2px 12px rgba(255, 255, 255, 0.9),
+    0 4px 20px rgba(13, 92, 86, 0.25) !important;
+    
+  animation: titleAppear 2s cubic-bezier(0.22, 0.61, 0.36, 1) both !important;
+  margin-bottom: 12px !important;
 }
 
 /* ─── 2. Các dòng phụ đề: Cỡ chữ nhỏ, thanh thoát & in nghiêng ─── */
@@ -1661,6 +1666,306 @@
   letter-spacing: 0.03em !important;
   opacity: 0.88;
 }
+
+/* ─── NÚT ÂM NHẠC NỀN CỔ PHONG (BACKGROUND MUSIC WIDGET) ─── */
+    #bg-music-player {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 9990;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      user-select: none;
+    }
+
+    /* Khung điều khiển ẩn/hiện khi rê chuột */
+    .music-panel {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(17, 94, 89, 0.2);
+      border-radius: 30px;
+      padding: 6px 16px 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(17, 94, 89, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-15px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    #bg-music-player:hover .music-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .music-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .music-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #0f766e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .music-name {
+      font-size: 0.78rem;
+      color: #1e3a4a;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Thanh chỉnh âm lượng */
+    .music-volume-slider {
+      width: 65px;
+      height: 4px;
+      accent-color: #0f766e;
+      cursor: pointer;
+    }
+
+    /* Nút tròn biểu tượng hoa sen / đĩa nhạc */
+    .music-disc-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff 0%, #e0f2f1 100%);
+      border: 2px solid #0f766e;
+      box-shadow: 0 6px 20px rgba(17, 94, 89, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .music-disc-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(17, 94, 89, 0.32);
+    }
+
+    /* Biểu tượng nốt nhạc */
+    .music-icon {
+      font-size: 22px;
+      transition: transform 0.3s ease;
+    }
+
+    /* Khi đang phát: đĩa xoay chậm và có sóng nhạc */
+    .music-disc-btn.playing .music-icon {
+      animation: rotateMusic 8s linear infinite;
+    }
+
+    @keyframes rotateMusic {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Sóng âm thanh nhảy nhẹ */
+    .sound-waves {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+      margin-left: 2px;
+    }
+
+    .sound-wave-bar {
+      width: 2.5px;
+      background: #0f766e;
+      border-radius: 2px;
+      height: 3px;
+    }
+
+    .music-disc-btn.playing ~ .music-panel .sound-wave-bar:nth-child(1) { animation: soundWave 0.8s ease-in-out infinite alternate; }
+    .music-disc-btn.playing ~ .music-panel .sound-wave-bar:nth-child(2) { animation: soundWave 0.6s ease-in-out infinite 0.2s alternate; }
+    .music-disc-btn.playing ~ .music-panel .sound-wave-bar:nth-child(3) { animation: soundWave 1.0s ease-in-out infinite 0.4s alternate; }
+
+    @keyframes soundWave {
+      0%   { height: 3px; }
+      100% { height: 14px; }
+    }
+
+    /* Khung iframe YouTube ẩn hoàn toàn */
+    #yt-hidden-player {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      left: -9999px;
+      top: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
+    /* ─── WIDGET ÂM NHẠC NỀN YOUTUBE (GÓC DƯỚI BÊN TRÁI) ──────────── */
+    #bg-music-player {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 9990;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .music-disc-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff 0%, #e0f2f1 100%);
+      border: 2px solid #0f766e;
+      box-shadow: 0 6px 20px rgba(17, 94, 89, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      outline: none;
+    }
+
+    .music-disc-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(17, 94, 89, 0.35);
+    }
+
+    .music-icon {
+      font-size: 22px;
+      line-height: 1;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    /* Đĩa xoay đều khi đang phát nhạc */
+    .music-disc-btn.playing .music-icon {
+      animation: rotateDisc 6s linear infinite;
+    }
+
+    @keyframes rotateDisc {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Khung trượt hiển thị tên bài và âm lượng khi rê chuột */
+    .music-panel {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(17, 94, 89, 0.25);
+      border-radius: 30px;
+      padding: 6px 16px 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(17, 94, 89, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-15px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    #bg-music-player:hover .music-panel,
+    #bg-music-player:focus-within .music-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .sound-waves {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 14px;
+    }
+
+    .sound-wave-bar {
+      width: 2.5px;
+      background: #0f766e;
+      border-radius: 2px;
+      height: 3px;
+    }
+
+    .music-disc-btn.playing ~ .music-panel .sound-wave-bar:nth-child(1) {
+      animation: soundWaveAnim 0.7s ease-in-out infinite alternate;
+    }
+    .music-disc-btn.playing ~ .music-panel .sound-wave-bar:nth-child(2) {
+      animation: soundWaveAnim 0.5s ease-in-out infinite 0.2s alternate;
+    }
+    .music-disc-btn.playing ~ .music-panel .sound-wave-bar:nth-child(3) {
+      animation: soundWaveAnim 0.9s ease-in-out infinite 0.4s alternate;
+    }
+
+    @keyframes soundWaveAnim {
+      0%   { height: 3px; }
+      100% { height: 14px; }
+    }
+
+    .music-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .music-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #0f766e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .music-name {
+      font-size: 0.78rem;
+      color: #1e3a4a;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .music-volume-slider {
+      width: 65px;
+      height: 4px;
+      accent-color: #0f766e;
+      cursor: pointer;
+    }
+
+    /* Ẩn hoàn toàn khung video ngầm */
+    #yt-hidden-player {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      left: -9999px;
+      bottom: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      #bg-music-player {
+        bottom: 18px;
+        left: 16px;
+      }
+      .music-panel {
+        max-width: 210px;
+      }
+      .music-name {
+        max-width: 95px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
 
   </style>
 <body>
@@ -2423,7 +2728,10 @@
   // Chạy ngay khi tải trang xong
   setTimeout(evaluate, 600);
 })();
+
 </script>
+
+
 
 <!-- ═══ Logic Điều Khiển & Cầu Nối Gemini Pro ═════════════════════════ -->
 <script>
@@ -2856,6 +3164,7 @@
       <p class="about-callout-sub">Cùng chúng tôi viết tiếp hành trình tôn vinh vẻ đẹp ngàn năm của người Việt.</p>
     </div>
   </div>
+
 </section>
 
 
@@ -3391,6 +3700,12 @@
   renderSprockets('sprocketTop');
   renderSprockets('sprocketBottom');
 })();
+
+/* ═════════════════════════════════════════════════════════════════════
+   HỆ THỐNG ÂM NHẠC NỀN YOUTUBE (XUYÊN SUỐT TRANG - TỰ ĐỘNG PHÁT ÊM ÁI)
+   ═════════════════════════════════════════════════════════════════════ */
+
+// BẠN CÓ THỂ THAY BẰNG ID VIDEO YOUTUBE BẤT KỲ TẠI ĐÂY:
 </script>
 
 <!-- ═══ Script Render Bộ Sưu Tập Tuyển Chọn ═══════════════════════════ -->
@@ -3652,6 +3967,296 @@
 
   // Khởi tạo chạy ngay lần đầu
   renderGallery('all');
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════
+     MUSIC PLAYER
+═══════════════════════════════════════════ -->
+
+<div id="bg-music-player"
+     title="Bấm để Bật/Tắt nhạc, rê chuột để chỉnh âm lượng">
+
+  <button
+    class="music-disc-btn"
+    id="musicToggleBtn"
+    type="button"
+    aria-label="Bật tắt nhạc">
+
+    <span class="music-icon" id="musicIcon">🔇</span>
+
+  </button>
+
+  <div class="music-panel">
+
+    <div class="sound-waves">
+      <div class="sound-wave-bar"></div>
+      <div class="sound-wave-bar"></div>
+      <div class="sound-wave-bar"></div>
+    </div>
+
+    <div class="music-title-wrap">
+      <span class="music-tag">Giai Điệu Tự Hào</span>
+
+      <span class="music-name">
+        Viết Tiếp Câu Chuyện Hòa Bình
+      </span>
+    </div>
+
+    <input
+      type="range"
+      class="music-volume-slider"
+      id="musicVolume"
+      min="0"
+      max="100"
+      value="30"
+      title="Âm lượng: 30%"
+    />
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     YOUTUBE PLAYER
+═══════════════════════════════════════════ -->
+
+<div id="yt-music-player"
+     style="
+       position: fixed;
+       width: 1px;
+       height: 1px;
+       left: -100px;
+       bottom: -100px;
+       opacity: 0.01;
+       pointer-events: none;
+     ">
+</div>
+
+
+<script>
+(function () {
+
+  const VIDEO_ID = 'tF5z8kkbzXk';
+  const START_TIME = 25;
+  const DEFAULT_VOLUME = 30;
+
+  let ytPlayer = null;
+  let isMusicPlaying = false;
+
+
+  /* ═══════════════════════════════════════
+     TẢI YOUTUBE IFRAME API
+  ═══════════════════════════════════════ */
+
+  const tag = document.createElement('script');
+
+  tag.src = 'https://www.youtube.com/iframe_api';
+
+  document.head.appendChild(tag);
+
+
+  /* ═══════════════════════════════════════
+     YOUTUBE API READY
+  ═══════════════════════════════════════ */
+
+  window.onYouTubeIframeAPIReady = function () {
+
+    ytPlayer = new YT.Player('yt-music-player', {
+
+      height: '1',
+      width: '1',
+
+      videoId: VIDEO_ID,
+
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        start: START_TIME,
+        rel: 0,
+        playsinline: 1
+      },
+
+      events: {
+
+        onReady: function (event) {
+
+          // Mặc định tắt
+          event.target.pauseVideo();
+
+          // Âm lượng mặc định 30%
+          event.target.setVolume(DEFAULT_VOLUME);
+
+          updateMusicUI(false);
+        },
+
+
+        onStateChange: function (event) {
+
+          // Đang phát
+          if (event.data === YT.PlayerState.PLAYING) {
+
+            isMusicPlaying = true;
+
+            updateMusicUI(true);
+          }
+
+
+          // Đang pause
+          else if (event.data === YT.PlayerState.PAUSED) {
+
+            isMusicPlaying = false;
+
+            updateMusicUI(false);
+          }
+
+
+          // Video kết thúc
+          else if (event.data === YT.PlayerState.ENDED) {
+
+            // Quay lại giây 25
+            ytPlayer.seekTo(START_TIME, true);
+
+            // Phát lại
+            ytPlayer.playVideo();
+          }
+
+        }
+
+      }
+
+    });
+
+  };
+
+
+  /* ═══════════════════════════════════════
+     CẬP NHẬT GIAO DIỆN
+  ═══════════════════════════════════════ */
+
+  function updateMusicUI(playing) {
+
+    const button =
+      document.getElementById('musicToggleBtn');
+
+    const icon =
+      document.getElementById('musicIcon');
+
+    if (!button || !icon) return;
+
+
+    if (playing) {
+
+      button.classList.add('playing');
+
+      icon.textContent = '🎵';
+
+    } else {
+
+      button.classList.remove('playing');
+
+      icon.textContent = '🔇';
+
+    }
+
+  }
+
+
+  /* ═══════════════════════════════════════
+     NÚT BẬT / TẮT NHẠC
+  ═══════════════════════════════════════ */
+
+  const toggleBtn =
+    document.getElementById('musicToggleBtn');
+
+
+  if (toggleBtn) {
+
+    toggleBtn.addEventListener('click', function () {
+
+      // YouTube chưa tải xong
+      if (!ytPlayer) {
+        return;
+      }
+
+
+      // ĐANG PHÁT → TẮT
+      if (isMusicPlaying) {
+
+        ytPlayer.pauseVideo();
+
+        return;
+      }
+
+
+      // ĐANG TẮT → BẬT
+
+      const volumeSlider =
+        document.getElementById('musicVolume');
+
+      const volume =
+        parseInt(volumeSlider.value, 10) || DEFAULT_VOLUME;
+
+
+      // Âm lượng
+      ytPlayer.setVolume(volume);
+
+
+      // Bắt đầu từ giây 25
+      ytPlayer.seekTo(
+        START_TIME,
+        true
+      );
+
+
+      // Phát nhạc
+      ytPlayer.playVideo();
+
+    });
+
+  }
+
+
+  /* ═══════════════════════════════════════
+     THANH ÂM LƯỢNG
+  ═══════════════════════════════════════ */
+
+  const volumeSlider =
+    document.getElementById('musicVolume');
+
+
+  if (volumeSlider) {
+
+    volumeSlider.addEventListener(
+      'input',
+      function () {
+
+        const volume =
+          parseInt(this.value, 10);
+
+
+        if (ytPlayer) {
+
+          ytPlayer.setVolume(volume);
+
+        }
+
+
+        this.title =
+          `Âm lượng: ${volume}%`;
+
+      }
+    );
+
+  }
+
+
+  /* ═══════════════════════════════════════
+     TRẠNG THÁI BAN ĐẦU
+  ═══════════════════════════════════════ */
+
+  updateMusicUI(false);
+
 })();
 </script>
 
