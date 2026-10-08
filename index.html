@@ -10,10 +10,73 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap&subset=vietnamese" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&display=swap" rel="stylesheet" />
-
-  <style>
+  <!-- Font uy nghiêm, mang hồn cốt di sản cho "Khơi nguồn dân tộc" -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap&subset=vietnamese" rel="stylesheet" /> 
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap&subset=vietnamese" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap" rel="stylesheet" />  <style>
     /* ─── Reset & Base ─────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after, body, button, input, textarea, select {
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+
+  /* ─── Tiêu đề Protest Revolution với ánh sáng đom đóm vàng luôn nhấp nháy ─── */
+.hero-title {
+  font-family: 'Protest Revolution', sans-serif !important;
+  font-size: clamp(3.8rem, 8.5vw, 6.8rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0.04em !important;
+  display: inline-block;
+  color: #fde047; /* Sắc vàng tươi làm nền */
+  animation: fireflyGlow 3s ease-in-out infinite !important;
+}
+
+/* ─── Hiệu ứng nhịp sáng đom đóm lập lòe huyền ảo ─── */
+@keyframes fireflyGlow {
+  0%, 100% {
+    /* Lúc ánh đom đóm thu lại, dịu ấm */
+    color: #eab308;
+    text-shadow: 
+      0 0 6px rgba(250, 204, 21, 0.4),
+      0 0 14px rgba(234, 179, 8, 0.25);
+    filter: brightness(0.85);
+  }
+  35% {
+    /* Bắt đầu bừng sáng */
+    color: #fde047;
+    text-shadow: 
+      0 0 10px rgba(254, 240, 138, 0.8),
+      0 0 25px rgba(250, 204, 21, 0.65),
+      0 0 45px rgba(234, 179, 8, 0.45);
+    filter: brightness(1.15);
+  }
+  48% {
+    /* Đỉnh điểm lóe sáng rực rỡ như đom đóm phát quang */
+    color: #fef9c3;
+    text-shadow: 
+      0 0 14px rgba(255, 255, 255, 0.95),
+      0 0 30px rgba(254, 240, 138, 0.9),
+      0 0 55px rgba(250, 204, 21, 0.85),
+      0 0 80px rgba(234, 179, 8, 0.6);
+    filter: brightness(1.35);
+  }
+  55% {
+    /* Lập lòe nhẹ một nhịp */
+    color: #fde047;
+    text-shadow: 
+      0 0 10px rgba(254, 240, 138, 0.8),
+      0 0 24px rgba(250, 204, 21, 0.7);
+    filter: brightness(1.15);
+  }
+  75% {
+    /* Dần mờ xuống */
+    color: #ca8a04;
+    text-shadow: 
+      0 0 8px rgba(250, 204, 21, 0.45),
+      0 0 18px rgba(202, 138, 4, 0.3);
+    filter: brightness(0.9);
+  }
+}
 
     :root {
       --mint:        #b8e8c8;
@@ -701,6 +764,132 @@
       0% { transform: translateY(0) scale(1); opacity: 0.5; }
       100% { transform: translateY(-30px) scale(1.05); opacity: 1; }
     }
+
+/* ─── VỀ CHÚNG TÔI (ABOUT US) ─────────────────────────────────── */
+    #ve-chung-toi {
+      position: relative;
+      z-index: 10;
+      padding: 90px 20px 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-story-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(246, 252, 250, 0.92));
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-radius: 28px;
+      padding: 44px 40px;
+      box-shadow: 0 16px 45px rgba(17, 94, 89, 0.08);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+
+    .about-story-card::before {
+      content: '“';
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-size: 140px;
+      font-family: 'Dancing Script', cursive;
+      color: rgba(224, 124, 196, 0.15);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .about-quote {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      color: var(--text-title);
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .about-lead-text {
+      font-size: 0.96rem;
+      color: var(--text-sub);
+      line-height: 1.9;
+      text-align: justify;
+      margin-bottom: 16px;
+    }
+
+    .about-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    @media (max-width: 850px) {
+      .about-pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-story-card {
+        padding: 32px 22px;
+      }
+    }
+
+    .about-pillar-box {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(17, 94, 89, 0.18);
+      border-radius: 20px;
+      padding: 26px 22px;
+      box-shadow: 0 8px 24px rgba(100, 140, 170, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .about-pillar-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(17, 94, 89, 0.14);
+      border-color: var(--petal-accent);
+    }
+
+    .about-pillar-icon {
+      font-size: 32px;
+      margin-bottom: 4px;
+    }
+
+    .about-pillar-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text-title);
+    }
+
+    .about-pillar-desc {
+      font-size: 0.85rem;
+      color: var(--text-ui);
+      line-height: 1.65;
+    }
+
+    .about-callout-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 24px 20px;
+      background: linear-gradient(135deg, rgba(115, 24, 24, 0.06), rgba(192, 96, 160, 0.08));
+      border: 1px dashed rgba(115, 24, 24, 0.25);
+      border-radius: 18px;
+    }
+
+    .about-callout-tagline {
+      font-family: 'Playpen Sans', cursive;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: #731818;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .about-callout-sub {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 6px;
+      font-style: italic;
+    }
+
   </style>
 </head>
 <!-- ═══ Styling Studio CSS ════════════════════════════════════════ -->
@@ -1446,6 +1635,32 @@
   }
 }
 
+  /* ─── 1. Tiêu đề "Khơi nguồn dân tộc": Font Pacifico, to bản & nổi bật ─── */
+.hero-title {
+  font-family: 'Protest Revolution', cursive !important;
+  font-size: clamp(4rem, 8.5vw, 7.2rem) !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  color: #731818 !important;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ─── 2. Các dòng phụ đề: Cỡ chữ nhỏ, thanh thoát & in nghiêng ─── */
+/* Áp dụng chuẩn cho tất cả các câu phụ đề bạn đã liệt kê */
+.hero-sub,
+.section-desc,
+.studio-subtitle,
+.gallery-subtitle {
+  font-size: 0.95rem !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.03em !important;
+  opacity: 0.88;
+}
+
   </style>
 <body>
 
@@ -1571,7 +1786,7 @@
     <li><a href="#carousel-section">Việt Phục</a></li>
     <li><a href="#phoi-do">Phối Đồ</a></li>
     <li><a href="#bo-suu-tap">Bộ Sưu Tập</a></li>
-    <li><a href="#">Về Chúng Tôi</a></li>
+    <li><a href="#ve-chung-toi">Về Chúng Tôi</a></li>
   </ul>
 </nav>
 
@@ -2585,6 +2800,60 @@
 
   <div class="gallery-grid" id="galleryGrid">
     <!-- Render tự động bởi JS -->
+  </div>
+</section>
+
+<!-- ═══ Section: Về Chúng Tôi (Lời Tự Sự & Giữ Hồn Xứ Sở) ═════════ -->
+<section id="ve-chung-toi">
+  <div class="studio-header">
+    <h2 class="studio-title">Khơi Lại Hồn Xưa</h2>
+    <p class="studio-subtitle">Tấm áo xưa mang cả dáng hình sông núi</p>
+  </div>
+
+  <div class="about-story-card">
+    <p class="about-quote">
+      "Di sản không sinh ra để ngủ yên sau lớp kính bảo tàng.<br/>
+      Di sản sống khi được người trẻ nâng niu và kiêu hãnh mặc lên mình."
+    </p>
+
+    <p class="about-lead-text">
+      Có bao giờ bạn đứng trước một bức tranh xưa hay xem lại bức ảnh đen trắng của bà, rồi bất giác rung động trước nếp vạt giao lĩnh mềm mại, chiếc khăn vấn đoan trang hay đường chỉ ngũ thân khép kín? Từng mũi kim thêu mây sóng, từng tà lụa bay trong gió thuở trước không chỉ là xiêm y để che mưa nắng — mà đó là cốt cách, là lễ nghi, là cả hồn cốt ngàn năm mà ông cha gửi gắm lại.
+    </p>
+
+    <p class="about-lead-text">
+      <strong>Khơi Nguồn Dân Tộc</strong> ra đời từ nỗi niềm thương nhớ những giá trị xưa cũ đang dần thưa vắng trong nhịp sống vội vã. Bằng việc kết hợp nét đẹp di sản ngàn đời cùng trí tuệ công nghệ đương đại, chúng tôi mong muốn xóa nhòa khoảng cách thế hệ: để chiếc áo xưa không còn là điều xa xôi trong sách sử, mà có thể tự nhiên bước ra phố thị, hòa cùng tiếng cười của những người trẻ hôm nay.
+    </p>
+
+    <div class="about-pillars-grid">
+      <div class="about-pillar-box">
+        <span class="about-pillar-icon">🌸</span>
+        <h3 class="about-pillar-title">Ký Ức Trong Từng Thớ Lụa</h3>
+        <p class="about-pillar-desc">
+          Mỗi nếp áo là một chứng nhân lịch sử. Chúng tôi trân trọng và lưu giữ từng chi tiết chuẩn mực văn hóa, từ cổ lập lĩnh triều Nguyễn đến nét bay bổng thời Lý - Trần.
+        </p>
+      </div>
+
+      <div class="about-pillar-box">
+        <span class="about-pillar-icon">🌱</span>
+        <h3 class="about-pillar-title">Giao Hòa Nhịp Thở Trẻ</h3>
+        <p class="about-pillar-desc">
+          Không gò bó trong định kiến. Cổ phục hoàn toàn có thể kết hợp cùng âu phục và phụ kiện hiện đại, để trang phục truyền thống sống động theo cách của Gen Z.
+        </p>
+      </div>
+
+      <div class="about-pillar-box">
+        <span class="about-pillar-icon">🏮</span>
+        <h3 class="about-pillar-title">Tự Hào Bước Ra Thế Giới</h3>
+        <p class="about-pillar-desc">
+          Để bất kỳ ai, khi khoác lên mình tà áo Việt, đều cảm nhận được dòng máu Lạc Hồng dâng trào trong tim — một niềm kiêu hãnh dân tộc không thể trộn lẫn.
+        </p>
+      </div>
+    </div>
+
+    <div class="about-callout-footer">
+      <p class="about-callout-tagline">“Áo mặc trên vai — Quê hương trong trái tim.”</p>
+      <p class="about-callout-sub">Cùng chúng tôi viết tiếp hành trình tôn vinh vẻ đẹp ngàn năm của người Việt.</p>
+    </div>
   </div>
 </section>
 
