@@ -251,7 +251,7 @@
     #carousel-section {
       position: relative;
       z-index: 1;
-      padding: 50px 0 70px;
+      padding: 90px 0 80px;
       overflow: hidden;
     }
 
@@ -1206,6 +1206,246 @@
       #ba-noi-mascot { bottom: 16px; right: 12px; }
       .ba-noi-bubble { max-width: 230px; }
     }
+
+    /* ─── BỘ SƯU TẬP (LOOKBOOK GALLERY) STYLES ─────────────────────── */
+#bo-suu-tap {
+  position: relative;
+  z-index: 10;
+  padding: 80px 20px 100px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.gallery-title {
+  font-family: 'Playpen Sans', cursive;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--text-title);
+  margin-bottom: 8px;
+}
+
+.gallery-subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.35rem;
+  color: var(--petal-accent);
+}
+
+/* Thanh lọc danh mục */
+.gallery-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(17, 94, 89, 0.25);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-ui);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.filter-btn:hover {
+  border-color: var(--petal-accent);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--text-title), #0f766e);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(17, 94, 89, 0.25);
+}
+
+/* Lưới hiển thị các thẻ bộ sưu tập */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 28px;
+}
+
+.lookbook-item-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 22px;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 32px rgba(100, 140, 170, 0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.lookbook-item-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(100, 140, 170, 0.2);
+}
+
+.item-visual-wrap {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.item-visual-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.lookbook-item-card:hover .item-visual-wrap img {
+  transform: scale(1.04);
+}
+
+.item-badge-style {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(17, 94, 89, 0.9);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.item-occasion-badge {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #92580a;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid #f0c070;
+}
+
+/* Phần nội dung chi tiết cấu thành */
+.item-content-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.item-heading {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--text-title);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.item-concept-desc {
+  font-size: 0.82rem;
+  color: var(--text-ui);
+  line-height: 1.55;
+  font-style: italic;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+/* Nhóm các thành phần lựa chọn tạo nên */
+.item-recipe-box {
+  background: rgba(240, 252, 250, 0.75);
+  border: 1px solid rgba(17, 94, 89, 0.15);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.recipe-row {
+  display: flex;
+  align-items: baseline;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--text-ui);
+}
+
+.recipe-label {
+  font-weight: 700;
+  color: var(--text-title);
+  min-width: 82px;
+  flex-shrink: 0;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+}
+
+.recipe-value {
+  color: #1e3a4a;
+  font-weight: 500;
+}
+
+/* Đánh giá văn hóa */
+.item-review-bubble {
+  background: #fffdf7;
+  border-left: 3px solid #f0c070;
+  padding: 8px 12px;
+  border-radius: 0 10px 10px 0;
+  font-size: 0.76rem;
+  color: #78350f;
+  line-height: 1.45;
+  margin-bottom: 18px;
+}
+
+/* Nút hành động */
+.item-card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-apply-look {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--text-title), #0f766e);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+}
+
+.btn-apply-look:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 16px rgba(17, 94, 89, 0.25);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
   </style>
 <body>
 
@@ -1330,7 +1570,7 @@
     <li><a href="#hero">Trang Chủ</a></li>
     <li><a href="#carousel-section">Việt Phục</a></li>
     <li><a href="#phoi-do">Phối Đồ</a></li>
-    <li><a href="#">Bộ Sưu Tập</a></li>
+    <li><a href="#bo-suu-tap">Bộ Sưu Tập</a></li>
     <li><a href="#">Về Chúng Tôi</a></li>
   </ul>
 </nav>
@@ -1456,8 +1696,10 @@
 
 <!-- ═══ Carousel Section ══════════════════════════════════════════════ -->
 <section id="carousel-section">
-  <p class="section-label">Dòng chảy Việt phục qua các thời kỳ</p>
-  <p class="section-desc">Cuộn chuột để dừng — chạm để khám phá</p>
+  <div class="studio-header">
+    <h2 class="studio-title">Dòng chảy Việt phục qua các thời kỳ</h2>
+    <p class="studio-subtitle">Cuộn chuột để dừng — chạm để khám phá</p>
+  </div>
 
   <div class="filmstrip-outer">
     <div style="overflow:hidden; width:100%;">
@@ -1517,6 +1759,9 @@
           <button class="pill-btn" data-prompt="a traditional silk halter neck undergarment Yem combined with sheer overcoat">Áo Yếm Lụa Đào</button>
           <button class="pill-btn" data-prompt="a tailored modern oversized blazer embroidered with traditional imperial cloud patterns">Blazer Thêu Mây Sóng (Hiện đại)</button>
           <button class="pill-btn" data-prompt="a modern cropped halter top inspired by traditional Vietnamese folk clothing">Áo Yếm Croptop Cách Tân</button>
+          <button class="pill-btn" data-prompt="an authentic traditional Vietnamese Ao Ngu Than Tay Chen with tight fitted sleeves, stand-up collar, made of woven silk">Áo Ngũ Thân Tay Chẽn</button>
+          <button class="pill-btn" data-prompt="a traditional southern Vietnamese Ao Ba Ba silk blouse with round neck, split sides, and front pockets">Áo Bà Ba Nam Bộ</button>
+          <button class="pill-btn" data-prompt="an ancient Vietnamese Doi Kham flowing robe with parallel lapels layered over silk undergarments">Áo Đối Khâm (Lý - Lê)</button>
         </div>
       </div>
 
@@ -1529,6 +1774,7 @@
           <button class="pill-btn" data-prompt="paired with classic ebony black silk wide-leg trousers">Quần Lụa Đen Tuyền</button>
           <button class="pill-btn" data-prompt="paired with a high-waisted pleated A-line skirt in modern aesthetic style">Chân Váy Xếp Ly Dài</button>
           <button class="pill-btn" data-prompt="paired with smart tailored high-waist straight-leg trousers in beige">Quần Tây Âu Ống Suông</button>
+          <button class="pill-btn" data-prompt="paired with a traditional Vietnamese long wrap-around dark black silk skirt (Vay Dong)">Váy Quây Đen Cổ Truyền</button>
         </div>
       </div>
 
@@ -1541,6 +1787,9 @@
           <button class="pill-btn" data-prompt="adorned with an engraved antique silver torc neckband (Kiềng Bạc)">Kiềng Bạc Chạm Trổ</button>
           <button class="pill-btn" data-prompt="wearing chic modern tinted sunglasses and stylish leather handbag">Kính Râm & Túi Xách Hiện Đại</button>
           <button class="pill-btn" data-prompt="wearing retro white street sneakers giving a confident contemporary youth look">Giày Sneaker Thể Thao</button>
+          <button class="pill-btn" data-prompt="wearing an iconic southern Vietnamese checkered black and white cotton scarf (Khan Ran)">Khăn Rằn Nam Bộ</button>
+          <button class="pill-btn" data-prompt="carrying a large flat traditional palm-leaf hat with silk ribbons (Non Quai Thao / Non Ba Tam)">Nón Ba Tầm Quai Thao</button>
+          <button class="pill-btn" data-prompt="wearing classic handmade Vietnamese wooden clogs (Guoc Moc)">Guốc Mộc Cổ Truyền</button>
         </div>
       </div>
 
@@ -1677,9 +1926,10 @@
 </section>
 
 <!-- ═══ Bà Nội AI — Script Logic Cảnh Báo Văn Hóa ══════════════════ -->
+<!-- ═══ Bà Nội AI — Script Logic Cảnh Báo & Khen Ngợi Chuẩn Văn Hóa ══════════════════ -->
 <script>
 (function () {
-  /* ── Elements ─────────────────────────────────────────────────────── */
+  /* ── 1. Khởi tạo Elements ────────────────────────────────────────── */
   const avatar   = document.getElementById('baNoiAvatar');
   const bubble   = document.getElementById('baNoiBubble');
   const dot      = document.getElementById('baNoiDot');
@@ -1689,111 +1939,196 @@
 
   if (!avatar) return;
 
-  /* ── State ─────────────────────────────────────────────────────────── */
-  let bubbleOpen      = false;
-  let currentRuleKey  = null;
+  let bubbleOpen     = false;
+  let currentRuleKey = null;
 
-  /* ── Rule Table ────────────────────────────────────────────────────
-     key: mã định danh rule (để tránh nhảy liên tục)
-     match(top, bottom, acc, occasion): trả true nếu combo vi phạm
-     warning: lời bà nội nói nhẹ nhàng
-     suggestion: gợi ý phối đồ cụ thể hơn
-  ─────────────────────────────────────────────────────────────────── */
-  const RULES = [
-    {
-      key: 'nhat-binh-sneaker',
-      match: (top, acc) =>
-        top.includes('Nhat Binh') &&
-        (acc.includes('sneaker') || acc.includes('sunglasses')),
-      warning: 'Cháu ơi 😄 Áo Nhật Bình là lễ phục cung đình cao quý của phi tần triều Nguyễn — thường chỉ xuất hiện trong đại lễ, kỷ yếu trang trọng. Mà cháu lại phối với sneaker thì... bà thấy vui vui nhưng mà lệch lệch á!',
-      suggestion: 'Với Áo Nhật Bình, bà thấy hợp nhất là đi hài thêu hoa sen, thêm Kiềng Bạc Chạm Trổ, chụp trong không khí Lễ Tết hoặc Kỷ Yếu cho đúng chất cung đình nè cháu! 👑'
-    },
-    {
-      key: 'nhat-binh-jeans',
-      match: (top, bottom) =>
-        top.includes('Nhat Binh') && bottom.includes('jeans'),
-      warning: 'Ủa cháu ơi 😅 Áo Nhật Bình ngũ sắc của bà phi mà kết hợp với jeans xanh... Bà không phán xét đâu, nhưng mà lịch sử nó không "đồng ý" lắm ha! Nhật Bình là y phục triều nghi cao cấp nhất nhé.',
-      suggestion: 'Cháu thử Quần Lụa Đen Tuyền hoặc Quần Lụa Trắng Ống Rộng đi — nhìn sẽ sang trọng và đúng với nguồn gốc lịch sử của bộ đồ hơn nhiều á! ✨'
-    },
-    {
-      key: 'giao-linh-hien-dai',
-      match: (top, bottom, acc) =>
-        top.includes('Giao Linh') &&
-        (bottom.includes('jeans') || bottom.includes('A-line') || acc.includes('sneaker')),
-      warning: 'Hehe bà biết cháu sáng tạo 😊 Nhưng Áo Giao Lĩnh là trang phục thế kỷ 13 thời Lý–Trần nghen — thời đó chưa có quần jeans hay chân váy xếp ly đâu cháu! Ghép vào có thể tạo nhầm lẫn về lịch sử.',
-      suggestion: 'Giao Lĩnh đẹp nhất khi phối với Quần Lụa Trắng Ống Rộng, thêm Kiềng Bạc Chạm Trổ — chụp trong thời tiết Sương Mù Huyền Ảo sẽ ra ảnh rất thần thánh đó cháu! 🌫️'
-    },
-    {
-      key: 'tu-than-hien-dai',
-      match: (top, acc) =>
-        top.includes('Tu Than') &&
-        (acc.includes('sunglasses') || acc.includes('sneaker')),
-      warning: 'Bà thấy cháu mạnh dạn quá 😄 Áo Tứ Thân là hồn của người phụ nữ Kinh Bắc xưa — gắn liền với ruộng đồng, hội hè dân gian. Phối với kính râm hay sneaker thì... bà cảm giác nó "trật chiều" một chút đó!',
-      suggestion: 'Tứ Thân hợp với Quạt Trầm Hương hoặc Khăn Đóng / Khăn Xếp nhất cháu ơi! Chụp trong dịp Hội / Festival Văn Hóa sẽ ra đúng không khí dân gian mà vẫn tươi trẻ! 🎡'
-    },
-    {
-      key: 'ao-tac-sneaker',
-      match: (top, acc) =>
-        top.includes('Ao Tac') && acc.includes('sneaker'),
-      warning: 'Áo Tấc Cổ Phong là lễ phục quan lại, truyền giáo thời xưa — trang nghiêm lắm cháu ơi! Bà thấy nó hơi "trái khoáy" khi đi với sneaker, giống như mặc vest đi dép lê vậy đó 😄',
-      suggestion: 'Áo Tấc hợp nhất với Quần Lụa Đen Tuyền và Khăn Đóng / Khăn Xếp — phối thêm dịp Sự Kiện Ngoại Giao hoặc Đám Cưới Truyền Thống sẽ ra đúng vị quan triều đình đó! 🏛️'
-    },
-    {
-      key: 'dam-cuoi-gau',
-      match: (top, bottom, acc, occasion) =>
-        occasion.includes('wedding') &&
-        (acc.includes('sneaker') || acc.includes('sunglasses') || bottom.includes('jeans')),
-      warning: 'Cháu ơi, dịp đám cưới truyền thống mà bà thấy combo này hơi nhẹ nhàng quá ha 😄 Đám cưới Việt mình trọng lễ nghi lắm — trang phục nên đủ trang trọng để tôn vinh dịp đặc biệt đó cháu!',
-      suggestion: 'Với đám cưới truyền thống, bà thấy Áo Dài Lụa + Quần Lụa Trắng + Kiềng Bạc hoặc Áo Nhật Bình + Quần Lụa Đen là chuẩn nhất! Vừa đẹp vừa đúng nề nếp! 💍'
-    },
-    {
-      key: 'yem-cuoi',
-      match: (top, occasion) =>
-        (top.includes('Yem Lua Dao') || top.includes('croptop')) &&
-        occasion.includes('wedding'),
-      warning: 'Ủa cháu định mặc Áo Yếm đi đám cưới à 😂 Áo Yếm là nét đẹp dân dã của thôn quê xưa — bình thường thì duyên lắm, nhưng đám cưới trọng đại mặc vậy bà sợ... nhà trai hiểu lầm đó nha!',
-      suggestion: 'Cho đám cưới, cháu thử Áo Dài Lụa Cổ Điển hoặc Áo Nhật Bình Cung Đình — vừa đẹp vừa trang trọng, đúng nghi lễ Việt hơn nhiều! Bà thấy cháu mặc cái nào cũng xinh á! 💕'
-    },
-  ];
-
-  /* ── Helper: đọc nút đang active theo selector ──────────────────── */
-  function readActive(gridId, selector) {
-    const btn = document.querySelector(`#${gridId} ${selector}.active`);
-    return btn ? (btn.getAttribute('data-prompt') || btn.getAttribute('data-val') || '') : '';
+  /* ── 2. Hàm đọc Text hiển thị của nút đang chọn (Chính xác tuyệt đối) ── */
+  function getSelectedText(gridId) {
+    const btn = document.querySelector(`#${gridId} .pill-btn.active`);
+    return btn ? btn.textContent.trim() : '';
   }
 
-  /* ── Kiểm tra toàn bộ rules và trả về rule đầu tiên vi phạm ──────── */
+  /* ── 3. Bảng Quy Tắc Văn Hóa (Chỉ dựa vào 2. Áo, 3. Quần/Váy, 4. Phụ Kiện) ── */
+  const RULES = [
+    // ── NHÓM CẢNH BÁO (LỆCH CHUẨN VĂN HÓA) ──
+    {
+      key: 'nhat-binh-modern-bottom',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        top.includes('Nhật Bình') && 
+        (bottom.includes('Jeans') || bottom.includes('Xếp Ly') || bottom.includes('Tây Âu')),
+      warning: 'Ủa cháu ơi 😅 Áo Nhật Bình là triều phục ngũ sắc của bậc Hoàng tộc, Phi tần triều Nguyễn. Lễ phục trang nghiêm như vậy mà phối với quần jeans, chân váy xếp ly hay quần âu thì lịch sử... "khóc ròng" đó nghen!',
+      suggestion: 'Cháu nên chọn Quần Lụa Trắng Ống Rộng hoặc Quần Lụa Đen Tuyền để giữ đúng phong thái đoan trang, đài các chốn cung đình nhé! ✨'
+    },
+    {
+      key: 'nhat-binh-street-acc',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        top.includes('Nhật Bình') && 
+        (acc.includes('Sneaker') || acc.includes('Kính Râm') || acc.includes('Khăn Rằn')),
+      warning: 'Cháu ơi 😄 Khoác áo Nhật Bình cung đình rực rỡ mà lại đi sneaker thể thao hay quàng khăn rằn Nam Bộ thì nhìn cọc cạch lắm á, sai lệch mất nét trang nghiêm cung phủ rồi!',
+      suggestion: 'Nhật Bình hợp nhất khi kết hợp cùng Kiềng Bạc Chạm Trổ hoặc Quạt Trầm Hương để toát lên đúng cốt cách quý phái phương Đông nha! 👑'
+    },
+    {
+      key: 'ao-tac-pha-cach',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        top.includes('Áo Tấc') && 
+        (bottom.includes('Jeans') || acc.includes('Sneaker') || acc.includes('Kính Râm')),
+      warning: 'Áo Tấc tay thụng là đại lễ phục dùng trong tế lễ, hôn sự trang trọng thời Nguyễn xưa. Ống tay áo buông rủ uy nghi mà cháu đi với sneaker hoặc quần jeans thì giống như đang mặc lễ phục đi chạy bộ vậy á!',
+      suggestion: 'Áo Tấc đẹp nhất là đi cùng Quần Lụa Trắng/Đen ống rộng và đội Khăn Đóng/Khăn Xếp, trông sẽ rất đĩnh đạc và chuẩn nề nếp gia phong!'
+    },
+    {
+      key: 'giao-linh-khan-dong',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        (top.includes('Giao Lĩnh') || top.includes('Đối Khâm')) && 
+        acc.includes('Khăn Đóng'),
+      warning: 'Hehe cháu phối bộ này bị "xuyên không" lệch tới hơn 500 năm rồi nè! Áo Giao Lĩnh là thời Lý–Trần (thế kỷ 11–14), còn Khăn Đóng/Khăn Xếp là nếp đội đầu thời Nguyễn (thế kỷ 19). Ghép lại là sai lệch niên đại lịch sử đó!',
+      suggestion: 'Khi diện Giao Lĩnh cổ phong Lý - Trần, người xưa để tóc tự nhiên hoặc cài trâm, cầm Quạt Trầm Hương hoặc đeo Kiềng Bạc là đẹp đúng điệu thời đại! 🌸'
+    },
+    {
+      key: 'giao-linh-modern-bottom',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        (top.includes('Giao Lĩnh') || top.includes('Đối Khâm')) && 
+        (bottom.includes('Jeans') || acc.includes('Sneaker')),
+      warning: 'Vạt áo Giao Lĩnh cổ phong mang hào khí Đông A thoát tục, đi với quần jeans xanh cứng hoặc sneaker thể thao sẽ làm mất đi độ bay bổng tha thướt vốn có của tà áo nghìn năm!',
+      suggestion: 'Cháu thử Quần Lụa Trắng Ống Rộng hoặc Váy Quây Đen Cổ Truyền xem, vừa tôn dáng vừa tạo cảm giác thanh tao như bước ra từ tranh cổ.'
+    },
+    {
+      key: 'tu-than-streetwear',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        top.includes('Tứ Thân') && 
+        (acc.includes('Kính Râm') || acc.includes('Sneaker') || acc.includes('Khăn Rằn') || bottom.includes('Tây Âu')),
+      warning: 'Áo Tứ Thân là biểu tượng duyên dáng của liền chị Kinh Bắc xưa. Phối kính râm, sneaker hay quàng khăn rằn Nam Bộ thì phá cách thật đó nhưng làm mất đi nét duyên quan họ ruộng đồng rồi!',
+      suggestion: 'Tứ Thân hợp nhất khi đi cùng Váy Quây Đen Cổ Truyền, tay cầm Quạt Trầm hoặc đội Nón Ba Tầm Quai Thao, chân đi guốc mộc mộc mạc cháu nhé! 🌾'
+    },
+    {
+      key: 'yem-don-le',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        (top.includes('Áo Yếm') || top.includes('Croptop')) && 
+        (bottom.includes('Jeans') || bottom.includes('Tây Âu')),
+      warning: 'Cháu ơi, Áo Yếm xưa là nội y mặc lót của phụ nữ Việt. Nếu mặc độc chiếc yếm với quần jeans/quần âu dạo phố thì cá tính đó, nhưng dễ gây hiểu lầm về trang phục truyền thống.',
+      suggestion: 'Thử kết hợp Yếm bên trong và khoác thêm chiếc Blazer Thêu Mây Sóng bên ngoài, vừa chuẩn mốt Gen Z hiện đại mà vẫn giữ nét duyên thầm tế nhị!'
+    },
+    {
+      key: 'baba-lech-vung-mien',
+      type: 'warning',
+      match: (top, bottom, acc) => 
+        top.includes('Bà Ba') && 
+        (acc.includes('Nón Ba Tầm') || acc.includes('Khăn Đóng') || acc.includes('Kiềng Bạc')),
+      warning: 'Áo bà ba mộc mạc miệt vườn sông nước Nam Bộ, đi với nón ba tầm Kinh Bắc hay kiềng bạc chạm trổ cung phủ thì hơi "lệch pha" văn hóa vùng miền đó cháu!',
+      suggestion: 'Với áo bà ba, chiếc Khăn Rằn Nam Bộ quấn cổ và đôi Guốc Mộc sẽ là mảnh ghép tự nhiên nhất, đậm đà tình đất phương Nam!'
+    },
+
+    // ── NHÓM KHEN NGỢI (PHỐI ĐỒ CHUẨN MỰC, CÓ GU) ──
+    {
+      key: 'nhat-binh-cung-dinh-chuan',
+      type: 'praise',
+      match: (top, bottom, acc) => 
+        top.includes('Nhật Bình') && 
+        (bottom.includes('Lụa Trắng') || bottom.includes('Lụa Đen')) && 
+        (acc.includes('Quạt Trầm') || acc.includes('Kiềng Bạc')),
+      warning: 'Bà chấm điểm 10 tuyệt đối cho bản phối này! 👑',
+      suggestion: 'Áo Nhật Bình cung đình đi cùng quần lụa suông và quạt trầm/kiềng bạc toát lên trọn vẹn vẻ kiêu sa, đài các của bậc quý tộc triều Nguyễn xưa!'
+    },
+    {
+      key: 'ao-dai-kinh-dien-chuan',
+      type: 'praise',
+      match: (top, bottom, acc) => 
+        top.includes('Áo Dài') && 
+        (bottom.includes('Lụa Trắng') || bottom.includes('Lụa Đen')) && 
+        (acc.includes('Kiềng Bạc') || acc.includes('Quạt Trầm') || acc.includes('Guốc Mộc')),
+      warning: 'Bản phối kinh điển không tì vết! 🌺',
+      suggestion: 'Tà áo dài lụa thướt tha kết hợp quần lụa ống rộng và kiềng bạc chạm trổ tôn vinh trọn vẹn nét đoan trang, dịu dàng ngàn đời của người phụ nữ Việt!'
+    },
+    {
+      key: 'tu-than-kinh-bac-chuan',
+      type: 'praise',
+      match: (top, bottom, acc) => 
+        top.includes('Tứ Thân') && 
+        bottom.includes('Váy Quây Đen') && 
+        (acc.includes('Nón Ba Tầm') || acc.includes('Quạt Trầm') || acc.includes('Guốc Mộc')),
+      warning: 'Đẹp chuẩn điệu liền chị Kinh Bắc trẩy hội Lim! 🌾',
+      suggestion: 'Áo tứ thân vạt buộc duyên dáng đi cùng váy quây đổng đen và nón quai thao ba tầm tái hiện xuất sắc nét mộc mạc, thanh tú của vùng quan họ Bắc Bộ!'
+    },
+    {
+      key: 'ba-ba-nam-bo-chuan',
+      type: 'praise',
+      match: (top, bottom, acc) => 
+        top.includes('Bà Ba') && 
+        bottom.includes('Lụa Đen') && 
+        (acc.includes('Khăn Rằn') || acc.includes('Guốc Mộc')),
+      warning: 'Hồn hậu, đậm đà phù sa miền Tây sông nước! 🚣',
+      suggestion: 'Áo bà ba xẻ tà phối với quần lụa đen tuyền và khăn rằn Nam Bộ tạo nên nét đẹp chân phương, phóng khoáng và ngập tràn tình cảm phương Nam!'
+    },
+    {
+      key: 'blazer-fusion-genz',
+      type: 'praise',
+      match: (top, bottom, acc) => 
+        top.includes('Blazer') && 
+        (bottom.includes('Jeans') || bottom.includes('Tây Âu') || bottom.includes('Xếp Ly')) && 
+        (acc.includes('Kiềng Bạc') || acc.includes('Kính Râm') || acc.includes('Sneaker')),
+      warning: 'Việt Phục Remix đúng tinh thần Gen Z! 🌟',
+      suggestion: 'Đưa họa tiết mây sóng cung đình lên áo khoác Blazer hiện đại, phối cùng âu phục và phụ kiện cá tính — vừa giữ được cội nguồn vừa hợp nhịp sống đương đại!'
+    },
+    {
+      key: 'ngu-than-tri-thuc-chuan',
+      type: 'praise',
+      match: (top, bottom, acc) => 
+        top.includes('Ngũ Thân Tay Chẽn') && 
+        (bottom.includes('Lụa Trắng') || bottom.includes('Tây Âu')) && 
+        (acc.includes('Khăn Đóng') || acc.includes('Quạt Trầm')),
+      warning: 'Phong thái trí thức An Nam đầu thế kỷ 20! 📚',
+      suggestion: 'Áo lập lĩnh ngũ thân tay chẽn đi cùng khăn đóng hoặc quần âu suông tạo nên diện mạo vừa nho nhã cổ phong vừa văn minh, đĩnh đạc!'
+    }
+  ];
+
+  /* ── 4. Hàm Kiểm Tra Điều Kiện ─────────────────────────────────── */
   function checkRules() {
-    const top      = readActive('topGrid',      '.pill-btn');
-    const bottom   = readActive('bottomGrid',   '.pill-btn');
-    const acc      = readActive('accGrid',      '.pill-btn');
-    const occasion = readActive('occasionGrid', '.occasion-pill');
+    const top    = getSelectedText('topGrid');
+    const bottom = getSelectedText('bottomGrid');
+    const acc    = getSelectedText('accGrid');
 
     for (const rule of RULES) {
-      if (rule.match(top, bottom, acc, occasion)) return rule;
+      if (rule.match(top, bottom, acc)) return rule;
     }
     return null;
   }
 
-  /* ── Hiển thị bubble ─────────────────────────────────────────────── */
+  /* ── 5. Hiển Thị Hộp Thoại Lời Nhắc ────────────────────────────── */
   function showBubble(rule) {
-    warnEl.textContent  = rule.warning;
-    sugEl.textContent   = rule.suggestion;
+    warnEl.textContent = rule.warning;
+    sugEl.textContent  = rule.suggestion;
+    
+    // Đổi màu header nếu là lời khen
+    const headerTitle = bubble.querySelector('.ba-noi-name');
+    if (rule.type === 'praise') {
+      headerTitle.textContent = '👵 Bà khen cháu nè:';
+      headerTitle.style.color = '#047857';
+      bubble.style.borderColor = '#34d399';
+    } else {
+      headerTitle.textContent = '👵 Bà nhắc cháu nè:';
+      headerTitle.style.color = '#92580a';
+      bubble.style.borderColor = '#f0c070';
+    }
+
     bubble.classList.add('visible');
     dot.classList.remove('show');
     bubbleOpen = true;
   }
 
-  /* ── Ẩn bubble ───────────────────────────────────────────────────── */
   function hideBubble() {
     bubble.classList.remove('visible');
     bubbleOpen = false;
   }
 
-  /* ── Ping avatar rồi hiện dot đỏ ────────────────────────────────── */
   function alertAvatar() {
     avatar.classList.remove('idle', 'ping');
-    void avatar.offsetWidth; // reflow để restart animation
+    void avatar.offsetWidth;
     avatar.classList.add('ping');
     dot.classList.add('show');
     setTimeout(() => {
@@ -1802,26 +2137,33 @@
     }, 700);
   }
 
-  /* ── Main: chạy mỗi khi người dùng đổi lựa chọn ─────────────────── */
+  /* ── 6. Đánh Giá Trạng Thái Ngay Khi Click ───────────────────────── */
   function evaluate() {
     const rule = checkRules();
     if (rule) {
       if (rule.key !== currentRuleKey) {
         currentRuleKey = rule.key;
-        if (bubbleOpen) showBubble(rule); // cập nhật nội dung nếu bubble đang mở
+        showBubble(rule);
         alertAvatar();
       }
     } else {
-      // Không còn vi phạm
+      // Khi là bản phối tự do không vi phạm
       if (currentRuleKey !== null) {
         currentRuleKey = null;
-        hideBubble();
+        warnEl.textContent = 'Bà xem qua rồi, cách phối này tự do, hài hòa và không vi phạm điều gì! 🎉';
+        sugEl.textContent  = 'Cứ tự tin sáng tạo tiếp nha, khi nào có combo đặc biệt bà sẽ nhắc tiếp nghen!';
+        const headerTitle = bubble.querySelector('.ba-noi-name');
+        headerTitle.textContent = '👵 Bà Nội nói...';
+        headerTitle.style.color = '#0f766e';
+        bubble.style.borderColor = '#f0c070';
+        bubble.classList.add('visible');
+        bubbleOpen = true;
         dot.classList.remove('show');
       }
     }
   }
 
-  /* ── Avatar click: toggle bubble hoặc hiện nội dung rule hiện tại ── */
+  /* ── 7. Bấm vào Avatar để bật/tắt thủ công ──────────────────────── */
   avatar.addEventListener('click', () => {
     if (bubbleOpen) {
       hideBubble();
@@ -1830,9 +2172,8 @@
       if (rule) {
         showBubble(rule);
       } else {
-        // Không có vi phạm — bà khen!
-        warnEl.textContent = 'Bà xem qua rồi, combo cháu chọn hôm nay ổn lắm! Hài hòa, đúng nguồn gốc mà vẫn có nét riêng — bà thích! 🎉';
-        sugEl.textContent  = 'Cứ phối tiếp đi nha! Khi nào cần bà tư vấn thì bấm vào bà 😄';
+        warnEl.textContent = 'Bà xem qua rồi, combo hôm nay cháu chọn rất ổn và có nét riêng! 🎉';
+        sugEl.textContent  = 'Cháu cứ thỏa sức thử tài phối đồ nhé, cần bà cố vấn thì cứ bấm vào bà 😄';
         bubble.classList.add('visible');
         bubbleOpen = true;
         dot.classList.remove('show');
@@ -1840,31 +2181,31 @@
     }
   });
 
-  /* ── Đóng bubble ─────────────────────────────────────────────────── */
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     hideBubble();
   });
 
-  /* ── Hook vào tất cả pill buttons + occasion pills + textarea ──────── */
+  /* ── 8. Gắn Sự Kiện Click: CHỈ theo dõi mục 2 (Áo), 3 (Quần/Váy), 4 (Phụ Kiện) ── */
   function hookAll() {
     document.querySelectorAll(
-      '#topGrid .pill-btn, #bottomGrid .pill-btn, #accGrid .pill-btn, #occasionGrid .occasion-pill'
-    ).forEach(btn => btn.addEventListener('click', () => setTimeout(evaluate, 50)));
-
-    const textarea = document.getElementById('customIdeaInput');
-    if (textarea) textarea.addEventListener('input', () => setTimeout(evaluate, 100));
+      '#topGrid .pill-btn, #bottomGrid .pill-btn, #accGrid .pill-btn'
+    ).forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Đợi 80ms để class .active được cập nhật sang nút mới
+        setTimeout(evaluate, 80);
+      });
+    });
   }
 
-  // Đợi DOM ổn định rồi hook
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', hookAll);
   } else {
     hookAll();
   }
 
-  // Chạy lần đầu sau khi trang load xong
-  setTimeout(evaluate, 800);
+  // Chạy ngay khi tải trang xong
+  setTimeout(evaluate, 600);
 })();
 </script>
 
@@ -2224,6 +2565,29 @@
   }
 })();
 </script>
+
+
+<!-- CHÈN TOÀN BỘ SECTION BỘ SƯU TẬP VÀO ĐÂY: -->
+<!-- ═══ Section: Bộ Sưu Tập Tuyển Chọn & Ý Tưởng Phối ═══════════════ -->
+<section id="bo-suu-tap">
+  <div class="gallery-header">
+    <h2 class="gallery-title">Bộ Sưu Tập Việt Phục Remix</h2>
+    <p class="gallery-subtitle">Khám phá các bản phối tiêu biểu & chạm lại hồn thiêng xứ sở</p>
+  </div>
+
+  <div class="gallery-filters" id="galleryFilters">
+    <button class="filter-btn active" data-cat="all">Tất Cả</button>
+    <button class="filter-btn" data-cat="cung-dinh">Cung Đình Remix</button>
+    <button class="filter-btn" data-cat="dao-pho">Dạo Phố Hiện Đại</button>
+    <button class="filter-btn" data-cat="le-tet">Lễ Tết & Hội Hè</button>
+    <button class="filter-btn" data-cat="nghe-thuat">Nghệ Thuật Fusion</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- Render tự động bởi JS -->
+  </div>
+</section>
+
 
 <!-- ═══ Footer ════════════════════════════════════════════════════════ -->
 <footer>
@@ -2758,5 +3122,268 @@
   renderSprockets('sprocketBottom');
 })();
 </script>
+
+<!-- ═══ Script Render Bộ Sưu Tập Tuyển Chọn ═══════════════════════════ -->
+<script>
+(function() {
+  // 1. KHO DỮ LIỆU CÁC MẪU PHỐI (Chỉ cần đổi link ảnh tại trường image)
+  const curatedCollection = [
+    {
+      id: 'look-1',
+      category: 'cung-dinh',
+      title: 'Nhật Bình Ngũ Sắc & Kiềng Bạc Cung Phủ',
+      concept: 'Tái hiện cốt cách cao quý của hoàng tộc triều Nguyễn giữa ánh chiều vàng hoàng thành.',
+      // ĐỔI ĐƯỜNG DẪN ẢNH CỦA BẠN TẠI ĐÂY:
+      image: 'ex/Nhật Bình Ngũ Sắc & Kiềng Bạc Cung Phủ.png',
+      badge: 'Cung Đình Cổ Điển',
+      occasionBadge: '🎓 Kỷ Yếu & Sự Kiện',
+      recipe: {
+        gender: 'woman',
+        genderText: 'Nữ',
+        top: 'Áo Nhật Bình Cung Đình',
+        bottom: 'Quần Lụa Đen Tuyền',
+        acc: 'Kiềng Bạc Chạm Trổ',
+        scene: '☀️ Nắng Vàng Chiều Tà',
+        occasion: '🎓 Kỷ Yếu Tốt Nghiệp'
+      },
+      baNoiReview: 'Áo Nhật Bình phối quần lụa đen và kiềng bạc chạm trổ là chuẩn mực cung nghi, giữ trọn nét thanh nhã quý phái.'
+    },
+    {
+      id: 'look-2',
+      category: 'dao-pho',
+      title: 'Tứ Thân Kinh Bắc & Quần Jeans Streetwear',
+      concept: 'Phá cách cùng làn gió Gen Z đương đại khi kết hợp tà áo tứ thân lụa đào với chất bụi bặm của quần denim.',
+      // ĐỔI ĐƯỜNG DẪN ẢNH CỦA BẠN TẠI ĐÂY:
+      image: 'ex/Tứ Thân Kinh Bắc & Quần Jeans Streetwear.png',
+      badge: 'Streetwear Remix',
+      occasionBadge: '🚶 Dạo Phố Cuối Tuần',
+      recipe: {
+        gender: 'woman',
+        genderText: 'Nữ',
+        top: 'Áo Tứ Thân Kinh Bắc',
+        bottom: 'Quần Jeans Xanh (Hiện đại)',
+        acc: 'Kính Râm & Túi Xách Hiện Đại',
+        scene: '🌤️ Trưa Nắng Rực Rỡ',
+        occasion: '🚶 Dạo Phố Cuối Tuần'
+      },
+      baNoiReview: 'Một nét phối đậm cá tính trẻ trung! Bản phối này cực kỳ hợp dạo phố, nhưng nhớ đừng diện vào các chốn tôn nghiêm nghen.'
+    },
+    {
+      id: 'look-3',
+      category: 'le-tet',
+      title: 'Áo Tấc Hoàng Kim & Khăn Đóng Du Xuân',
+      concept: 'Phong thái đĩnh đạc, nho nhã của chàng trai đất Việt đón Tết đoàn viên trong sắc áo thụng truyền thống.',
+      // ĐỔI ĐƯỜNG DẪN ẢNH CỦA BẠN TẠI ĐÂY:
+      image: 'ex/Áo Tấc Hoàng Kim & Khăn Đóng Du Xuân.png',
+      badge: 'Truyền Thống Chuẩn Mực',
+      occasionBadge: '🎆 Lễ Tết Nguyên Đán',
+      recipe: {
+        gender: 'man',
+        genderText: 'Nam',
+        top: 'Áo Tấc Cổ Phong',
+        bottom: 'Quần Lụa Trắng Ống Rộng',
+        acc: 'Khăn Đóng / Khăn Xếp',
+        scene: '☀️ Nắng Vàng Chiều Tà',
+        occasion: '🎆 Lễ Tết Nguyên Đán'
+      },
+      baNoiReview: 'Áo tấc vàng kết hợp khăn đóng mang lại vẻ sáng sủa, trang nghiêm và rất cát tường trong dịp đầu xuân năm mới.'
+    },
+    {
+      id: 'look-4',
+      category: 'nghe-thuat',
+      title: 'Hào Khí Giao Lĩnh Trong Sương Khói Đông A',
+      concept: 'Nét cổ phong thời Lý - Trần với vạt áo đan chéo giao lĩnh tao nhã, thoát tục trong màn sương khói huyền ảo.',
+      // ĐỔI ĐƯỜNG DẪN ẢNH CỦA BẠN TẠI ĐÂY:
+      image: 'ex/Hào Khí Giao Lĩnh Trong Sương Khói Đông A.png',
+      badge: 'Cổ Phong Thời Lý - Trần',
+      occasionBadge: '📷 Chụp Ảnh Nghệ Thuật',
+      recipe: {
+        gender: 'woman',
+        genderText: 'Nữ',
+        top: 'Áo Giao Lĩnh (Lý - Trần)',
+        bottom: 'Quần Lụa Trắng Ống Rộng',
+        acc: 'Quạt Trầm Hương',
+        scene: '🌫️ Sương Mù Huyền Ảo',
+        occasion: '📷 Chụp Ảnh Nghệ Thuật'
+      },
+      baNoiReview: 'Vạt áo giao lĩnh phối cùng quạt trầm hương trong sương sớm mang lại nét đẹp tĩnh tại, đậm tinh thần thiền phái xưa.'
+    },
+    {
+      id: 'look-5',
+      category: 'dao-pho',
+      title: 'Áo Bà Ba Phù Sa & Khăn Rằn Nam Bộ',
+      concept: 'Nét đẹp hồn hậu, chân chất đậm đà phù sa miền Tây sông nước, mang lại cảm giác mộc mạc nhưng ngập tràn sức sống phóng khoáng.',
+      // ĐỔI ĐƯỜNG DẪN ẢNH CỦA BẠN:
+      image: 'ex/Áo Bà Ba Phù Sa & Khăn Rằn Nam Bộ.png',
+      badge: 'Dân Dã Nam Bộ',
+      occasionBadge: '🚶 Dạo Phố Cuối Tuần',
+      recipe: {
+        gender: 'woman',
+        genderText: 'Nữ',
+        top: 'Áo Bà Ba Lụa Nam Bộ',
+        bottom: 'Quần Lụa Đen Tuyền',
+        acc: 'Khăn Rằn Nam Bộ',
+        scene: '☀️ Nắng Vàng Chiều Tà',
+        occasion: '🚶 Dạo Phố Cuối Tuần'
+      },
+      baNoiReview: 'Áo bà ba xẻ tà với quần lụa đen và khăn rằn vắt vai là nét duyên mộc mạc nhất của người con gái Nam Bộ xưa, diện đi đâu nhìn cũng thấy thương, thấy gần gũi!'
+    },
+
+    // ── MẪU 6: THƯ SINH TRÍ THỨC TÂN THỜI ĐẦU TK XX ──
+    {
+      id: 'look-6',
+      category: 'cung-dinh',
+      title: 'Ngũ Thân Tay Chẽn & Quần Tây Tân Thời',
+      concept: 'Phong thái nho nhã, lịch lãm của tầng lớp trí thức An Nam đầu thế kỷ 20: giữ cổ phục lập lĩnh ngũ thân nhưng kết hợp âu phục hiện đại.',
+      // ĐỔI ĐƯỜNG DẪN ẢNH CỦA BẠN:
+      image: 'ex/Ngũ Thân Tay Chẽn & Quần Tây Tân Thời.png',
+      badge: 'Thư Sinh Tân Thời',
+      occasionBadge: '🏛️ Thăm Bảo Tàng',
+      recipe: {
+        gender: 'man',
+        genderText: 'Nam',
+        top: 'Áo Ngũ Thân Tay Chẽn',
+        bottom: 'Quần Tây Âu Ống Suông',
+        acc: 'Khăn Đóng / Khăn Xếp',
+        scene: '☁️ Trời Mây Dịu Nhẹ',
+        occasion: '🏛️ Thăm Bảo Tàng'
+      },
+      baNoiReview: 'Áo ngũ thân tay chẽn gọn gàng đi cùng quần âu suông tạo nên phong thái trí thức thời kỳ giao thời Á - Âu rất đĩnh đạc, vừa cổ phong vừa văn minh!'
+    }
+  ];
+
+  // 2. HÀM HIỂN THỊ DỮ LIỆU RA LƯỚI BỘ SƯU TẬP
+  const galleryGrid = document.getElementById('galleryGrid');
+  const filterBtns = document.querySelectorAll('#galleryFilters .filter-btn');
+
+  function renderGallery(filter = 'all') {
+    if (!galleryGrid) return;
+    galleryGrid.innerHTML = '';
+
+    const items = filter === 'all' 
+      ? curatedCollection 
+      : curatedCollection.filter(item => item.category === filter);
+
+    items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'lookbook-item-card';
+      card.innerHTML = `
+        <div class="item-visual-wrap">
+          <img src="${item.image}" alt="${item.title}" onerror="this.src='ex/icon hoa sen nobg.png'; this.style.objectFit='contain';" loading="lazy" />
+          <span class="item-badge-style">${item.badge}</span>
+          <span class="item-occasion-badge">${item.occasionBadge}</span>
+        </div>
+        <div class="item-content-body">
+          <h3 class="item-heading">${item.title}</h3>
+          <p class="item-concept-desc">"${item.concept}"</p>
+          
+          <!-- BẢNG THÔNG TIN LỰA CHỌN CẤU THÀNH CHI TIẾT -->
+          <div class="item-recipe-box">
+            <div class="recipe-row">
+              <span class="recipe-label">👤 Nhân vật:</span>
+              <span class="recipe-value">${item.recipe.genderText}</span>
+            </div>
+            <div class="recipe-row">
+              <span class="recipe-label">👘 Thân trên:</span>
+              <span class="recipe-value">${item.recipe.top}</span>
+            </div>
+            <div class="recipe-row">
+              <span class="recipe-label">👖 Thân dưới:</span>
+              <span class="recipe-value">${item.recipe.bottom}</span>
+            </div>
+            <div class="recipe-row">
+              <span class="recipe-label">✨ Phụ kiện:</span>
+              <span class="recipe-value">${item.recipe.acc}</span>
+            </div>
+            <div class="recipe-row">
+              <span class="recipe-label">🌤️ Bối cảnh:</span>
+              <span class="recipe-value">${item.recipe.scene}</span>
+            </div>
+            <div class="recipe-row">
+              <span class="recipe-label">🗓️ Dịp dùng:</span>
+              <span class="recipe-value">${item.recipe.occasion}</span>
+            </div>
+          </div>
+
+          <div class="item-review-bubble">
+            <strong>👵 Nhận xét văn hóa:</strong> ${item.baNoiReview}
+          </div>
+
+          <div class="item-card-actions">
+            <button class="btn-apply-look" onclick="applyLookbookPreset('${item.id}')">
+              <span>🪄 Thử Ngay Bản Phối Này</span>
+            </button>
+          </div>
+        </div>
+      `;
+      galleryGrid.appendChild(card);
+    });
+  }
+
+  // 3. XỬ LÝ NÚT BỘ LỌC
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGallery(btn.getAttribute('data-cat'));
+    });
+  });
+
+  // 4. KÍCH HOẠT NẠP THÔNG SỐ VÀO XƯỞNG PHỐI ĐỒ KHI BẤM "THỬ NGAY"
+  window.applyLookbookPreset = function(itemId) {
+    const item = curatedCollection.find(i => i.id === itemId);
+    if (!item) return;
+
+    function activatePill(containerId, textToMatch) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const btns = container.querySelectorAll('.pill-btn, .occasion-pill');
+      btns.forEach(btn => {
+        if (btn.textContent.trim().includes(textToMatch.trim()) || textToMatch.trim().includes(btn.textContent.trim())) {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    // Chọn giới tính
+    const genderBtns = document.querySelectorAll('#genderGrid .pill-btn');
+    genderBtns.forEach(b => {
+      if (b.getAttribute('data-val') === item.recipe.gender) {
+        genderBtns.forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+      }
+    });
+
+    activatePill('topGrid', item.recipe.top);
+    activatePill('bottomGrid', item.recipe.bottom);
+    activatePill('accGrid', item.recipe.acc);
+    activatePill('sceneGrid', item.recipe.scene);
+    activatePill('occasionGrid', item.recipe.occasion);
+
+    const customIdeaInput = document.getElementById('customIdeaInput');
+    if (customIdeaInput) {
+      customIdeaInput.value = item.concept;
+      const ideaCharCount = document.getElementById('ideaCharCount');
+      if (ideaCharCount) ideaCharCount.textContent = customIdeaInput.value.length;
+    }
+
+    // Cập nhật lại prompt
+    const promptPreview = document.getElementById('promptPreview');
+    const activeTop = document.querySelector('#topGrid .pill-btn.active');
+    if (activeTop) activeTop.click();
+
+    // Cuộn mượt lên xưởng phối đồ
+    const studioSection = document.getElementById('phoi-do');
+    if (studioSection) {
+      studioSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Khởi tạo chạy ngay lần đầu
+  renderGallery('all');
+})();
+</script>
+
 </body>
 </html>
