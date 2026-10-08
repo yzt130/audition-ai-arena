@@ -688,7 +688,7 @@
     .watermark-svg {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 10px rgba(17, 94, 89, 0.4));
+      will-change: transform;
       animation: floatWatermark 25s ease-in-out infinite alternate;
       color: var(--text-title);
     }
@@ -740,13 +740,14 @@
 
     /* Glassmorphism Panels */
     .studio-card {
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
       border-radius: 20px;
       padding: 28px;
-      box-shadow: 0 12px 36px rgba(100, 140, 170, 0.12);
+      box-shadow: 0 12px 36px rgba(100, 140, 170, 0.10);
+      contain: content; /* Ngăn trình duyệt vẽ lại card khi canvas nền chạy */
     }
 
     .control-group {
@@ -934,6 +935,45 @@
 
     @keyframes spinLotus {
       to { transform: rotate(360deg); }
+    }
+    
+    /* ─── Tùy biến Frame Lookbook ─── */
+    .frame-select-wrap {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .frame-btn {
+      flex: 1;
+      padding: 6px 10px;
+      border: 1px solid rgba(17, 94, 89, 0.3);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-ui);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .frame-btn.active {
+      background: var(--text-title);
+      color: #fff;
+      border-color: var(--text-title);
+    }
+
+    /* Hiệu ứng viền hiển thị trên web */
+    .result-frame.frame-royal {
+      border: 10px solid #d4af37 !important;
+      outline: 2px dashed #92580a;
+      outline-offset: -5px;
+    }
+    .result-frame.frame-editorial {
+      border: 14px solid #ffffff !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25) !important;
+    }
+    .result-frame.frame-ink {
+      border: 8px solid #115e59 !important;
+      border-radius: 4px !important;
     }
 
     @media (max-width: 900px) {
@@ -1570,28 +1610,62 @@
     </div>
 
     <!-- CỘT PHẢI: PROMPT & KHUNG NHẬN ẢNH -->
+    <!-- CỘT PHẢI: PROMPT & KHUNG NHẬN ẢNH LOOKBOOK -->
     <div class="studio-card">
-      <label class="control-label">Prompt Tối Ưu Cho Gemini Pro:</label>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <label class="control-label" style="margin-bottom: 0;">Prompt Phối Đồ:</label>
+        <span style="font-size: 0.72rem; color: var(--text-light); background: rgba(17,94,89,0.1); padding: 2px 8px; border-radius: 10px;">Chuẩn Imagen 3 (Gemini)</span>
+      </div>
+      
       <div class="prompt-box" id="promptPreview">Đang khởi tạo prompt...</div>
 
-      <!-- Khung Tranh Hiển Thị Ảnh (Hỗ trợ Paste / Kéo thả) -->
-      <div class="result-frame" id="resultFrame" tabindex="0" title="Nhấn vào đây rồi bấm Ctrl + V để dán ảnh từ Gemini Pro">
+      <!-- Nút chính: Tự động copy và chuyển thẳng sang Gemini -->
+      <button class="btn-generate" id="btnOpenGemini" style="margin-bottom: 14px;">
+        <span>🚀 Mở Gemini & Tự Động Sao Chép Prompt</span>
+      </button>
+
+
+      <!-- Thanh Chọn Mẫu Khung Ảnh -->
+      <div style="margin-bottom: 8px;">
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-title);">🖼️ Chọn Khung Lookbook:</span>
+        <div class="frame-select-wrap" id="frameSelectGroup" style="margin-top: 4px;">
+          <button class="frame-btn active" data-frame="royal">👑 Hoàng Kim</button>
+          <button class="frame-btn" data-frame="editorial">📰 Tạp Chí</button>
+          <button class="frame-btn" data-frame="ink">🌿 Thủy Mặc</button>
+        </div>
+      </div>
+
+      <!-- Khung Trưng Bày Phục Trang (Hỗ trợ Paste / Kéo thả) -->
+      <div class="result-frame" id="resultFrame" tabindex="0" title="Bấm vào đây rồi nhấn Ctrl + V để dán ảnh từ Gemini vào">
         <div class="result-placeholder" id="resultPlaceholder">
-          <svg style="width:48px; height:48px; margin-bottom:10px; stroke:var(--text-light);" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+          <svg style="width:44px; height:44px; margin-bottom:8px; stroke:var(--text-light);" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
             <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
-          <p style="font-weight: 600; margin-bottom: 4px;">Khung Trưng Bày Phục Trang</p>
-          <span style="font-size: 0.72rem; opacity: 0.85;">Nhấn <strong>Ctrl + V</strong> hoặc kéo thả ảnh từ Gemini vào đây</span>
+          <p style="font-weight: 700; margin-bottom: 4px; color: var(--text-title); font-size: 0.9rem;">Khung Trưng Bày Lookbook</p>
+          <span style="font-size: 0.73rem; opacity: 0.85; line-height: 1.45; display: block;">
+            Sau khi sinh ảnh bên Gemini, chuột phải chọn <strong>Copy image</strong>,<br/>quay lại đây nhấn <strong>Ctrl + V</strong> để hoàn thiện template
+          </span>
         </div>
         <img id="generatedImg" alt="Phục trang Việt Nam AI" />
       </div>
 
-      <button class="btn-generate" id="btnOpenGemini">
-        <span>🚀 Mở Gemini Pro & Dán Prompt</span>
-      </button>
+      <!-- Template Thông Tin Đi Kèm (Tự động mở khóa khi dán ảnh) -->
+      <div id="lookbookCard" style="display: none; background: rgba(255, 255, 255, 0.85); border: 1.5px solid var(--petal-light); border-radius: 14px; padding: 14px; margin-top: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px dashed rgba(17,94,89,0.25); padding-bottom: 8px; margin-bottom: 8px;">
+          <h4 id="lookbookTitle" style="color: var(--text-title); font-size: 0.95rem; font-weight: 700; margin: 0;">✨ Thẻ Phối Đồ Việt Phục</h4>
+          <span id="lookbookOccasionBadge" style="font-size: 0.7rem; background: var(--text-title); color: #fff; padding: 2px 8px; border-radius: 12px;">Dịp lễ</span>
+        </div>
+        
+        <p id="lookbookDetails" style="font-size: 0.78rem; color: var(--text-ui); line-height: 1.6; margin-bottom: 8px;"></p>
+        
+        <div style="background: rgba(254, 243, 199, 0.7); border: 1px solid #f0c070; border-radius: 8px; padding: 8px 10px; font-size: 0.75rem; color: #78350f;">
+          <strong>👵 Nhận xét từ Bà Nội AI:</strong> <span id="lookbookBaNoiReview">Hài hòa, đúng tinh thần di sản!</span>
+        </div>
+      </div>
 
+      <!-- Các nút thao tác -->
       <div class="result-actions" style="margin-top: 14px;">
-        <button class="btn-secondary" id="btnDownload" style="display:none;">Tải Ảnh Về Máy</button>
+        <button class="btn-secondary" id="btnDownload" style="display: none;">💾 Tải Ảnh Về Máy</button>
         <button class="btn-secondary" id="btnCopyPrompt">Sao Chép Prompt</button>
         <label class="btn-secondary" style="text-align: center; cursor: pointer;">
           Tải Ảnh Lên
@@ -1796,12 +1870,12 @@
 
 <!-- ═══ Logic Điều Khiển & Cầu Nối Gemini Pro ═════════════════════════ -->
 <script>
-(function(){
-  // 1. Quản lý tương tác các nút chọn (pill-btn)
+(function() {
+  // 1. Quản lý tương tác các nút chọn
   function setupButtonGroup(containerId, onChange) {
     const container = document.getElementById(containerId);
     if (!container) return;
-    const buttons = container.querySelectorAll('.pill-btn');
+    const buttons = container.querySelectorAll('.pill-btn, .occasion-pill');
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('active'));
@@ -1811,31 +1885,17 @@
     });
   }
 
-  // Quản lý tương tác các nút chọn dịp (occasion-pill)
-  function setupOccasionGroup(containerId, onChange) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    const buttons = container.querySelectorAll('.occasion-pill');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        if (onChange) onChange();
-      });
-    });
+  function getActiveVal(containerId, selector = '.pill-btn') {
+    const activeBtn = document.querySelector(`#${containerId} ${selector}.active`);
+    return activeBtn ? (activeBtn.getAttribute('data-prompt') || activeBtn.getAttribute('data-val') || '') : '';
   }
 
-  function getActiveVal(containerId) {
-    const activeBtn = document.querySelector(`#${containerId} .pill-btn.active`);
-    return activeBtn ? (activeBtn.getAttribute('data-prompt') || activeBtn.getAttribute('data-val')) : '';
+  function getActiveText(containerId, selector = '.pill-btn') {
+    const activeBtn = document.querySelector(`#${containerId} ${selector}.active`);
+    return activeBtn ? activeBtn.textContent.trim() : '';
   }
 
-  function getActiveOccasion() {
-    const activeBtn = document.querySelector('#occasionGrid .occasion-pill.active');
-    return activeBtn ? (activeBtn.getAttribute('data-prompt') || '') : '';
-  }
-
-  // 2. Cấu trúc Prompt phân tầng chuẩn Imagen 3 của Gemini Pro
+  // 2. Tạo prompt tiếng Anh chuẩn Imagen 3
   function buildPrompt() {
     const gender = getActiveVal('genderGrid');
     const subject = gender === 'man' ? 'Vietnamese handsome young man' : 'Vietnamese elegant young woman';
@@ -1843,15 +1903,17 @@
     const bottom = getActiveVal('bottomGrid');
     const accessory = getActiveVal('accGrid');
     const scene = getActiveVal('sceneGrid');
-    const occasion = getActiveOccasion();
+    const occasion = getActiveVal('occasionGrid', '.occasion-pill');
     const customIdea = (document.getElementById('customIdeaInput') || {}).value || '';
 
-    let prompt = `Create an image: A high-end cinematic full-body fashion photography of a graceful ${subject}, standing head-to-toe in camera frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Weather and lighting: ${scene}.`;
+    // Ép tạo 1 ảnh độc lập (single solitary frame, no collage)
+    let prompt = `A single standalone cinematic photograph of one solitary ${subject}, full-body shot standing head-to-toe in a single unified frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Atmospheric environment and lighting: ${scene}.`;
 
     if (occasion) prompt += ` Occasion context: ${occasion}.`;
-    if (customIdea.trim()) prompt += ` Additional creative concept: ${customIdea.trim()}.`;
+    if (customIdea.trim()) prompt += ` Creative concept: ${customIdea.trim()}.`;
 
-    prompt += ` Cultural fashion aesthetics, editorial magazine lookbook, authentic textiles, crisp sharp fabric textures, natural soft lighting, 8k resolution, realistic human anatomy, highly detailed photorealistic masterpiece.`;
+    // Lệnh cấm phân tách khung hình hoặc ảnh collage
+    prompt += ` Cultural Vietnamese fashion aesthetics, crisp authentic textiles, fine silk embroidery textures, natural studio and ambient lighting, 8k resolution, photorealistic masterpiece. Absolutely single image, single person, unified camera perspective, no split screen, no collage, no side-by-side panels, no diptych, no multiple views.`;
     return prompt;
   }
 
@@ -1860,12 +1922,10 @@
     if (promptPreview) promptPreview.innerText = buildPrompt();
   }
 
-  ['genderGrid', 'topGrid', 'bottomGrid', 'accGrid', 'sceneGrid'].forEach(id => {
+  ['genderGrid', 'topGrid', 'bottomGrid', 'accGrid', 'sceneGrid', 'occasionGrid'].forEach(id => {
     setupButtonGroup(id, updatePromptDisplay);
   });
-  setupOccasionGroup('occasionGrid', updatePromptDisplay);
 
-  // Textarea "Idea riêng" — cập nhật prompt & đếm ký tự
   const customIdeaInput = document.getElementById('customIdeaInput');
   const ideaCharCount = document.getElementById('ideaCharCount');
   if (customIdeaInput) {
@@ -1874,221 +1934,292 @@
       updatePromptDisplay();
     });
   }
-
   updatePromptDisplay();
 
-
-  // 3. Sao chép Prompt thủ công
-  document.getElementById('btnCopyPrompt').addEventListener('click', () => {
-    navigator.clipboard.writeText(promptPreview.innerText).then(() => {
-      alert('Đã sao chép prompt vào bộ nhớ tạm!');
-    });
-  });
-
-  // 4. Mở Gemini Pro và tự động copy Prompt
-  const btnOpenGemini = document.getElementById('btnOpenGemini');
-  btnOpenGemini.addEventListener('click', () => {
-    const promptText = buildPrompt();
-    navigator.clipboard.writeText(promptText).then(() => {
-      window.open('https://gemini.google.com/app', '_blank');
-    }).catch(() => {
-      window.open('https://gemini.google.com/app', '_blank');
-    });
-  });
-
-  // 5. Cơ chế đưa ảnh từ Clipboard (Ctrl + V) hoặc kéo thả vào website
+  // 3. Quản lý chuyển đổi kiểu khung (Đặt ở ngoài để chọn lúc nào cũng được)
+  let currentFrame = 'royal';
   const resultFrame = document.getElementById('resultFrame');
+  const frameBtns = document.querySelectorAll('#frameSelectGroup .frame-btn');
+  frameBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      frameBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFrame = btn.getAttribute('data-frame');
+      if (resultFrame) {
+        resultFrame.className = 'result-frame frame-' + currentFrame;
+      }
+    });
+  });
+  if (resultFrame) resultFrame.className = 'result-frame frame-' + currentFrame;
+
+  // 4. Mở Gemini & Copy Prompt
+  const btnOpenGemini = document.getElementById('btnOpenGemini');
+  if (btnOpenGemini) {
+    btnOpenGemini.addEventListener('click', () => {
+      const promptText = buildPrompt();
+      navigator.clipboard.writeText(promptText).then(() => {
+        btnOpenGemini.innerHTML = '<span>✅ Đã Copy! Đang mở Gemini...</span>';
+        setTimeout(() => {
+          btnOpenGemini.innerHTML = '<span>🚀 Mở Gemini & Tự Động Sao Chép Prompt</span>';
+        }, 3000);
+        window.open('https://gemini.google.com/app', '_blank');
+      }).catch(() => {
+        window.open('https://gemini.google.com/app', '_blank');
+      });
+    });
+  }
+
+  const btnCopyPrompt = document.getElementById('btnCopyPrompt');
+  if (btnCopyPrompt) {
+    btnCopyPrompt.addEventListener('click', () => {
+      navigator.clipboard.writeText(promptPreview.innerText).then(() => {
+        alert('✨ Đã sao chép prompt!');
+      });
+    });
+  }
+
+  // 5. Hiển thị Lookbook & Ghép khung Canvas khi tải ảnh
   const resultPlaceholder = document.getElementById('resultPlaceholder');
   const generatedImg = document.getElementById('generatedImg');
   const btnDownload = document.getElementById('btnDownload');
-  const fileUpload = document.getElementById('fileUpload');
+  const lookbookCard = document.getElementById('lookbookCard');
+  const lookbookTitle = document.getElementById('lookbookTitle');
+  const lookbookOccasionBadge = document.getElementById('lookbookOccasionBadge');
+  const lookbookDetails = document.getElementById('lookbookDetails');
+  const lookbookBaNoiReview = document.getElementById('lookbookBaNoiReview');
 
-  function displayImage(sourceUrl) {
+  function renderLookbookTemplate(sourceUrl) {
     generatedImg.src = sourceUrl;
     generatedImg.style.display = 'block';
     resultPlaceholder.style.display = 'none';
     btnDownload.style.display = 'block';
 
+    const topText = getActiveText('topGrid');
+    const bottomText = getActiveText('bottomGrid');
+    const accText = getActiveText('accGrid');
+    const occasionText = getActiveText('occasionGrid', '.occasion-pill');
+    const weatherText = getActiveText('sceneGrid');
+
+    lookbookTitle.textContent = `Bộ Phục Trang: ${topText}`;
+    lookbookOccasionBadge.textContent = occasionText || 'Phong Cách Tự Do';
+    
+    lookbookDetails.innerHTML = `
+      • <strong>Thân trên:</strong> ${topText}<br/>
+      • <strong>Thân dưới:</strong> ${bottomText}<br/>
+      • <strong>Điểm xuyết:</strong> ${accText}<br/>
+      • <strong>Bối cảnh & Ánh sáng:</strong> ${weatherText}
+    `;
+
+    const baNoiWarning = document.getElementById('baNoiWarning');
+    if (baNoiWarning && baNoiWarning.textContent.trim()) {
+      lookbookBaNoiReview.textContent = baNoiWarning.textContent.trim();
+    } else {
+      lookbookBaNoiReview.textContent = "Bà xem qua rồi, cách phối hài hòa, giữ được nét thanh nhã truyền thống mà vẫn mang phong vị hiện đại!";
+    }
+
+    lookbookCard.style.display = 'block';
+
+    // Vẽ Canvas đóng khung ảnh chất lượng cao 1200x1600
+    // Vẽ Canvas đóng khung ảnh: TỰ ĐỘNG THEO KÍCH THƯỚC GỐC, KHÔNG BÓP MÉO
     btnDownload.onclick = () => {
-      const a = document.createElement('a');
-      a.href = sourceUrl;
-      a.download = `viet-phuc-gemini-pro-${Date.now()}.png`;
-      a.click();
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        // 1. Lấy chính xác kích thước gốc của bức ảnh tải về
+        const origW = img.naturalWidth || img.width;
+        const origH = img.naturalHeight || img.height;
+
+        // Tính toán lề viền và chân thẻ tỷ lệ thuận với ảnh gốc
+        const pad = Math.round(origW * 0.05);          // Lề hai bên và lề trên (5%)
+        const footerH = Math.max(Math.round(origH * 0.22), 200);      // Chiều cao phần thông tin bên dưới (16%)
+        const cvsW = origW + pad * 2;
+        const cvsH = origH + pad + footerH;
+
+        const cvs = document.createElement('canvas');
+        const ctx = cvs.getContext('2d');
+        cvs.width = cvsW;
+        cvs.height = cvsH;
+
+        // Helper: Vẽ con dấu triện đỏ truyền thống
+        function drawCulturalSeal(x, y, size) {
+          ctx.save();
+          ctx.strokeStyle = '#b91c1c';
+          ctx.fillStyle = 'rgba(185, 28, 28, 0.08)';
+          ctx.lineWidth = Math.max(2, size * 0.06);
+          ctx.strokeRect(x, y, size, size);
+          ctx.fillRect(x, y, size, size);
+          ctx.fillStyle = '#b91c1c';
+          ctx.font = `bold ${Math.round(size * 0.28)}px sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('KHƠI', x + size / 2, y + size * 0.32);
+          ctx.fillText('NGUỒN', x + size / 2, y + size * 0.68);
+          ctx.restore();
+        }
+
+        // 2. Vẽ theo từng phong cách Khung
+        if (currentFrame === 'royal') {
+          // ── PHONG CÁCH HOÀNG KIM (Cung Đình Cổ Kính) ──
+          ctx.fillStyle = '#fcf9f2';
+          ctx.fillRect(0, 0, cvsW, cvsH);
+
+          // Vẽ ảnh giữ nguyên 100% kích thước gốc, tuyệt đối không méo
+          ctx.drawImage(img, pad, pad, origW, origH);
+
+          // Viền vàng kim cổ điển
+          const borderThick = Math.max(6, Math.round(origW * 0.015));
+          ctx.strokeStyle = '#d4af37';
+          ctx.lineWidth = borderThick;
+          ctx.strokeRect(pad / 2, pad / 2, cvsW - pad, cvsH - pad);
+          ctx.strokeStyle = '#854d0e';
+          ctx.lineWidth = Math.max(1.5, borderThick * 0.2);
+          ctx.strokeRect(pad / 2 + 5, pad / 2 + 5, cvsW - pad - 10, cvsH - pad - 10);
+
+          // Họa tiết góc (Corner brackets)
+          const cornerLen = Math.round(pad * 0.8);
+          ctx.strokeStyle = '#854d0e';
+          ctx.lineWidth = Math.max(2, borderThick * 0.4);
+          [[pad, pad], [cvsW - pad, pad], [pad, origH + pad], [cvsW - pad, origH + pad]].forEach(([cx, cy]) => {
+            ctx.strokeRect(cx - 6, cy - 6, 12, 12);
+          });
+
+          // Thông tin phục trang
+          const textY = origH + pad + Math.round(footerH * 0.35);
+          ctx.fillStyle = '#78350f';
+          ctx.font = `bold ${Math.round(footerH * 0.22)}px "Be Vietnam Pro", sans-serif`;
+          ctx.textAlign = 'left';
+          ctx.fillText(`VIỆT PHỤC: ${topText.toUpperCase()}`, pad, textY);
+
+          ctx.font = `${Math.round(footerH * 0.13)}px "Be Vietnam Pro", sans-serif`;
+          ctx.fillStyle = '#451a03';
+          ctx.fillText(`Phối: ${bottomText} · Điểm xuyết: ${accText}`, pad, textY + footerH * 0.22);
+          ctx.fillText(`Bối cảnh: ${weatherText} | Dịp: ${occasionText || 'Di sản đương đại'}`, pad, textY + footerH * 0.42);
+
+          // Triện đỏ góc phải
+          const sealSize = Math.round(footerH * 0.65);
+          drawCulturalSeal(cvsW - pad - sealSize, origH + pad + Math.round(footerH * 0.18), sealSize);
+
+        } else if (currentFrame === 'editorial') {
+          // ── PHONG CÁCH TẠP CHÍ (Editorial Lookbook Hiện Đại) ──
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, cvsW, cvsH);
+
+          // Vẽ ảnh gốc
+          ctx.drawImage(img, pad, pad, origW, origH);
+
+          // Đường kẻ chỉ tinh tế
+          ctx.strokeStyle = '#e2e8f0';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(pad, pad, origW, origH);
+
+          // Header nhỏ trên ảnh
+          ctx.fillStyle = '#64748b';
+          ctx.font = `bold ${Math.round(footerH * 0.11)}px sans-serif`;
+          ctx.textAlign = 'left';
+          ctx.fillText('HERITAGE LOOKBOOK ISSUE · 2026', pad, pad - 10);
+
+          // Typography phong cách tạp chí thời trang
+          const textY = origH + pad + Math.round(footerH * 0.38);
+          ctx.fillStyle = '#0f172a';
+          ctx.font = `900 ${Math.round(footerH * 0.24)}px "Playpen Sans", sans-serif`;
+          ctx.fillText(topText.toUpperCase(), pad, textY);
+
+          ctx.font = `500 ${Math.round(footerH * 0.13)}px "Be Vietnam Pro", sans-serif`;
+          ctx.fillStyle = '#475569';
+          ctx.fillText(`Phối đồ: ${bottomText} + ${accText}`, pad, textY + footerH * 0.22);
+          ctx.fillText(`Sự kiện: ${occasionText || 'Việt phục Remix'} · Ánh sáng: ${weatherText}`, pad, textY + footerH * 0.42);
+
+          // Dấu chứng nhận bản quyền bên phải
+          ctx.textAlign = 'right';
+          ctx.font = `bold ${Math.round(footerH * 0.14)}px "Be Vietnam Pro", sans-serif`;
+          ctx.fillStyle = '#115e59';
+          ctx.fillText('KHƠI NGUỒN DÂN TỘC', cvsW - pad, textY + footerH * 0.15);
+          ctx.font = `italic ${Math.round(footerH * 0.11)}px sans-serif`;
+          ctx.fillStyle = '#94a3b8';
+          //ctx.fillText('Verified Cultural Combination', cvsW - pad, textY + footerH * 0.35);
+
+        } else {
+          // ── PHONG CÁCH THỦY MẶC (Thanh Nhã, Tối Giản) ──
+          ctx.fillStyle = '#f0fdfa';
+          ctx.fillRect(0, 0, cvsW, cvsH);
+
+          ctx.drawImage(img, pad, pad, origW, origH);
+
+          // Viền ngọc bích (Deep Teal)
+          ctx.strokeStyle = '#115e59';
+          ctx.lineWidth = Math.max(4, Math.round(origW * 0.01));
+          ctx.strokeRect(pad - 6, pad - 6, origW + 12, origH + 12);
+
+          const textY = origH + pad + Math.round(footerH * 0.35);
+          ctx.fillStyle = '#115e59';
+          ctx.font = `bold ${Math.round(footerH * 0.22)}px "Dancing Script", cursive, sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.fillText(`🌸 ${topText} · Nhịp Thở Đương Đại 🌸`, cvsW / 2, textY);
+
+          ctx.font = `${Math.round(footerH * 0.13)}px "Be Vietnam Pro", sans-serif`;
+          ctx.fillStyle = '#1e3a4a';
+          ctx.fillText(`${bottomText}  |  ${accText}  |  ${occasionText || 'Dạo phố'}`, cvsW / 2, textY + footerH * 0.25);
+
+          ctx.font = `italic ${Math.round(footerH * 0.11)}px "Be Vietnam Pro", sans-serif`;
+          ctx.fillStyle = '#0f766e';
+          ctx.fillText(`"Mỗi lựa chọn là một cách để chạm lại cội nguồn"`, cvsW / 2, textY + footerH * 0.45);
+        }
+
+        // 3. Tải file về máy (Định dạng PNG sắc nét)
+        const link = document.createElement('a');
+        link.download = `viet-phuc-${currentFrame}-${Date.now()}.png`;
+        link.href = cvs.toDataURL('image/png');
+        link.click();
+      };
+      img.src = sourceUrl;
     };
   }
-
-  // Lắng nghe sự kiện Paste (Ctrl + V) trên toàn trang web
+  // Lắng nghe sự kiện Paste (Ctrl + V)
   window.addEventListener('paste', (e) => {
     const items = (e.clipboardData || e.originalEvent.clipboardData).items;
     for (const item of items) {
       if (item.type.indexOf('image') !== -1) {
         const file = item.getAsFile();
         const reader = new FileReader();
-        reader.onload = (event) => displayImage(event.target.result);
+        reader.onload = (event) => renderLookbookTemplate(event.target.result);
         reader.readAsDataURL(file);
         break;
       }
     }
   });
 
-  // Kéo và thả file ảnh vào khung
-  resultFrame.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    resultFrame.style.borderColor = 'var(--petal-accent)';
-  });
+  // Kéo thả và upload ảnh
+  if (resultFrame) {
+    resultFrame.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      resultFrame.style.borderColor = 'var(--petal-accent)';
+    });
+    resultFrame.addEventListener('dragleave', () => {
+      resultFrame.style.borderColor = 'rgba(17, 94, 89, 0.25)';
+    });
+    resultFrame.addEventListener('drop', (e) => {
+      e.preventDefault();
+      resultFrame.style.borderColor = 'rgba(17, 94, 89, 0.25)';
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        const file = e.dataTransfer.files[0];
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = (event) => renderLookbookTemplate(event.target.result);
+          reader.readAsDataURL(file);
+        }
+      }
+    });
+  }
 
-  resultFrame.addEventListener('dragleave', () => {
-    resultFrame.style.borderColor = 'rgba(17, 94, 89, 0.25)';
-  });
-
-  resultFrame.addEventListener('drop', (e) => {
-    e.preventDefault();
-    resultFrame.style.borderColor = 'rgba(17, 94, 89, 0.25)';
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      if (file.type.startsWith('image/')) {
+  const fileUpload = document.getElementById('fileUpload');
+  if (fileUpload) {
+    fileUpload.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
         const reader = new FileReader();
-        reader.onload = (event) => displayImage(event.target.result);
+        reader.onload = (event) => renderLookbookTemplate(event.target.result);
         reader.readAsDataURL(file);
       }
-    }
-  });
-
-  // Tải file trực tiếp từ máy
-  fileUpload.addEventListener('change', (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (event) => displayImage(event.target.result);
-      reader.readAsDataURL(file);
-    }
-  });
-})();
-</script>
-
-<!-- ═══ Logic Điều Khiển & Tự Động Sinh Ảnh Trong Trang ═══════════════ -->
-<script>
-(function(){
-  // 1. Quản lý tương tác chọn trang phục
-  function setupButtonGroup(containerId, onChange) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    const buttons = container.querySelectorAll('.pill-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        if (onChange) onChange();
-      });
-    });
-  }
-
-  function getActiveVal(containerId) {
-    const activeBtn = document.querySelector(`#${containerId} .pill-btn.active`);
-    return activeBtn ? (activeBtn.getAttribute('data-prompt') || activeBtn.getAttribute('data-val')) : '';
-  }
-
-  function getActiveOccasion2() {
-    const activeBtn = document.querySelector('#occasionGrid .occasion-pill.active');
-    return activeBtn ? (activeBtn.getAttribute('data-prompt') || '') : '';
-  }
-
-  // 2. Cơ chế ghép Prompt phân tầng chuẩn Full-body
-  function buildPrompt() {
-    const gender = getActiveVal('genderGrid');
-    const subject = gender === 'man' ? 'Vietnamese handsome young man' : 'Vietnamese elegant young woman';
-    const top = getActiveVal('topGrid');
-    const bottom = getActiveVal('bottomGrid');
-    const accessory = getActiveVal('accGrid');
-    const scene = getActiveVal('sceneGrid');
-    const occasion = getActiveOccasion2();
-    const customIdea = (document.getElementById('customIdeaInput') || {}).value || '';
-
-    let prompt = `A high-end cinematic full-body fashion photography of a graceful ${subject}, standing head-to-toe in camera frame. Upper body garment: explicitly wearing ${top}. Lower body garment: specifically and clearly ${bottom}, showcasing the distinct combination between upper and lower attire. Accessories: ${accessory}. Weather and lighting: ${scene}.`;
-
-    if (occasion) prompt += ` Occasion context: ${occasion}.`;
-    if (customIdea.trim()) prompt += ` Additional creative concept: ${customIdea.trim()}.`;
-
-    prompt += ` Cultural fashion aesthetics, editorial magazine lookbook, authentic textiles, crisp sharp fabric textures, natural soft lighting, 8k resolution, realistic human anatomy, highly detailed photorealistic masterpiece.`;
-    return prompt;
-  }
-
-  const promptPreview = document.getElementById('promptPreview');
-  function updatePromptDisplay() {
-    if (promptPreview) promptPreview.innerText = buildPrompt();
-  }
-
-  ['genderGrid', 'topGrid', 'bottomGrid', 'accGrid', 'sceneGrid'].forEach(id => {
-    setupButtonGroup(id, updatePromptDisplay);
-  });
-  updatePromptDisplay();
-
-
-  // 3. Nút Sao Chép Prompt
-  const btnCopy = document.getElementById('btnCopyPrompt');
-  if (btnCopy) {
-    btnCopy.addEventListener('click', () => {
-      navigator.clipboard.writeText(promptPreview.innerText).then(() => {
-        alert('Đã sao chép prompt vào bộ nhớ tạm!');
-      });
-    });
-  }
-
-  // 4. Xử lý Tự động sinh ảnh và hiển thị thẳng vào khung tranh
-  const btnGenerate = document.getElementById('btnGenerate') || document.getElementById('btnOpenGemini');
-  const loader = document.getElementById('resultLoader');
-  const placeholder = document.getElementById('resultPlaceholder');
-  const generatedImg = document.getElementById('generatedImg');
-  const btnDownload = document.getElementById('btnDownload');
-
-  if (btnGenerate) {
-    btnGenerate.innerHTML = '<span>✨ Dệt Họa Trang Phục Tự Động</span>';
-    btnGenerate.addEventListener('click', () => {
-      const promptText = buildPrompt();
-
-      // Hiển thị trạng thái đang xử lý
-      btnGenerate.disabled = true;
-      btnGenerate.innerHTML = '<span>🌸 Đang dệt họa trang phục...</span>';
-      loader.style.display = 'block';
-      placeholder.style.display = 'none';
-      generatedImg.style.display = 'none';
-      if (btnDownload) btnDownload.style.display = 'none';
-
-      // Tạo URL ngẫu nhiên tránh cache
-      const seed = Math.floor(Math.random() * 9999999);
-      const encodedPrompt = encodeURIComponent(promptText);
-      const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=768&height=1024&model=flux&nologo=true&seed=${seed}`;
-
-      // Tải và hiển thị ảnh trực tiếp lên trang web
-      const img = new Image();
-      img.onload = () => {
-        generatedImg.src = imageUrl;
-        generatedImg.style.display = 'block';
-        loader.style.display = 'none';
-        btnGenerate.disabled = false;
-        btnGenerate.innerHTML = '<span>✨ Dệt Họa Trang Phục Tự Động</span>';
-
-        if (btnDownload) {
-          btnDownload.style.display = 'block';
-          btnDownload.onclick = () => {
-            const a = document.createElement('a');
-            a.href = imageUrl;
-            a.download = `viet-phuc-${Date.now()}.jpg`;
-            a.target = '_blank';
-            a.click();
-          };
-        }
-      };
-
-      img.onerror = () => {
-        loader.style.display = 'none';
-        btnGenerate.disabled = false;
-        btnGenerate.innerHTML = '<span>✨ Dệt Họa Trang Phục Tự Động</span>';
-        placeholder.style.display = 'block';
-        placeholder.innerHTML = '<p style="color:#b91c1c;">⚠️ Không thể kết nối máy chủ tạo ảnh. Vui lòng thử lại!</p>';
-      };
-
-      img.src = imageUrl;
     });
   }
 })();
